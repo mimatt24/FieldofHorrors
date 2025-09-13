@@ -1,3 +1,16 @@
 @startuml
-A-->B
+skinparam dpi 180
+rectangle Player {
+  component Classes
+  component Inventory
+  component Prestige
+}
+rectangle Systems {
+  component ScoreBoard
+  component Seasons
+  component Fusion
+}
+Player --> ScoreBoard
+Prestige --> Seasons
+Classes --> Fusion
 @enduml

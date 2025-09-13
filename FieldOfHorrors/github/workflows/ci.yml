@@ -1,0 +1,78 @@
+name: FOH Docs & Palette
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'design/**'
+      - 'docs/**'
+      - 'tools/**'
+      - 'art/**'
+  workflow_dispatch:
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Mermaid CLI for .mmd -> PNG
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm i -g @mermaid-js/mermaid-cli
+
+      - name: Generate Mermaid PNGs
+        run: |
+          mkdir -p art/autogen
+          if [ -f design/flow.mmd ]; then mmdc -i design/flow.mmd -o art/autogen/flow.png; fi
+
+      # PlantUML for .puml -> PNG
+      - name: PlantUML Export
+        uses: timbru31/action-plantuml@v1
+        with:
+          files: design/systems.puml
+          output: png
+          output-folder: art/autogen
+        continue-on-error: true
+
+      # Pandoc -> PDFs from Markdown
+      - name: Install Pandoc
+        run: sudo apt-get update && sudo apt-get install -y pandoc
+      - name: Build PDFs
+        run: |
+          mkdir -p docs/out
+          if [ -f design/gdd.md ]; then pandoc design/gdd.md -o docs/out/gdd.pdf; fi
+          if [ -f docs/weekly_report_template.md ]; then                 sed -e "s/{{DATE}}/$(date -u +%Y-%m-%d)/" docs/weekly_report_template.md | pandoc -o docs/out/weekly_report.pdf;               fi
+
+      # Palette builder (Pillow)
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Pillow
+        run: pip install pillow
+      - name: Build Palette Assets
+        run: python tools/build_palette.py
+
+      # Upload artifacts
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FOH-assets
+          path: |
+            art/autogen/*.png
+            art/autogen/*.gpl
+            docs/out/*.pdf
+
+      # Post to Discord if secret is set
+      - name: Post summary to Discord
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          if [ -n "$DISCORD_WEBHOOK_URL" ]; then                 SUMMARY="Docs updated $(date -u +%Y-%m-%dT%H:%MZ). Flowchart, PDFs, Palette built.";                 curl -H "Content-Type: application/json" -d "{"content":"🧰 **CI Update**: $SUMMARY"}" "$DISCORD_WEBHOOK_URL";               else                 echo "DISCORD_WEBHOOK_URL not set. Skipping Discord post.";               fi
+
+      - name: Post images to Discord
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          if [ -n "$DISCORD_WEBHOOK_URL" ]; then                 [ -f art/autogen/flow.png ] && curl -F "payload_json={"content":"📊 Updated Flowchart"}" -F "file1=@art/autogen/flow.png" "$DISCORD_WEBHOOK_URL";                 [ -f art/autogen/palette.png ] && curl -F "payload_json={"content":"🎨 Updated Palette"}" -F "file1=@art/autogen/palette.png" "$DISCORD_WEBHOOK_URL";               else                 echo "DISCORD_WEBHOOK_URL not set. Skipping Discord images.";               fi

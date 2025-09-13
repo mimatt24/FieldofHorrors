@@ -1,2 +1,20 @@
 flowchart TD
-  A-->B
+  A[Run Start] --> B{Mode?}
+  B -->|Standard| C[Stages & Boss Gates]
+  B -->|Daily/Weekly| D[Challenge Modifiers]
+  C --> E[End Boss: Referee King]
+  E --> F{Win?}
+  F -->|Yes| G[National Championship Unlocked]
+  F -->|No| A
+  G --> H{Prestige?}
+  H -->|Prestige| I[Reset run-level, gain Hall of Fame Points]
+  H -->|Continue| J[Keep pushing base game]
+  I --> K[ScoreBoard Submit]
+  J --> K
+  K --> L{Season rollover (6 mo)?}
+  L -->|Yes| M[New League: lvl 1, keep cosmetics; seasonal ladder]
+  L -->|No| N[Climb Leaderboards]
+  M --> O[Seasonal rewards (jerseys, banners, skins)]
+  N --> P{Ascended?}
+  P -->|Yes| Q[Multi-Talented (locked fusion pairs)]
+  P -->|No| A
