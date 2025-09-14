@@ -6,23 +6,23 @@ flowchart TB
   classDef cap fill:#754c3f,stroke:#12100e,color:#eee,stroke-width:2px;
   classDef debuff fill:#1c1214,stroke:#57cc11,color:#57cc11,stroke-dasharray: 5 3;
 
-  A[QB START<br/>Signature: Summons & Tactical Throws]:::early
+  A["QB START<br/>Signature: Summons & Tactical Throws"]:::early
 
   %% Early Tier
-  E1[Offensive Line I<br/>Summon 1 Lineman (shield + slow push)]:::early
-  E2[Precision Pass I<br/>Thrown ball pierces 1 target]:::early
-  E3[Playbook I<br/>+10% Summon HP, +5% Player Move Speed]:::early
-  D1{{Debuff Crystal: Selfish Captain<br/>-15% Player Damage, +20% Summon Damage}}:::debuff
+  E1["Offensive Line I<br/>Summon 1 Lineman (shield + slow push)"]:::early
+  E2["Precision Pass I<br/>Thrown ball pierces 1 target"]:::early
+  E3["Playbook I<br/>+10% Summon HP, +5% Player Move Speed"]:::early
+  D1{{"Debuff Crystal: Selfish Captain<br/>-15% Player Damage, +20% Summon Damage"}}:::debuff
 
   %% Mid Tier
-  M1[Offensive Line II<br/>+1 Lineman, taunt pulse on spawn]:::mid
-  M2[Precision Pass II<br/>Explodes on last pierce (small AoE)]:::mid
-  M3[Audible Call<br/>Swap Linemen to Receivers mid-fight (15s cd)]:::mid
-  D2{{Debuff Crystal: Fatigue<br/>-10% Stamina Regen, +10% Crit Chance (summons & throws)}}:::debuff
+  M1["Offensive Line II<br/>+1 Lineman, taunt pulse on spawn"]:::mid
+  M2["Precision Pass II<br/>Explodes on last pierce (small AoE)"]:::mid
+  M3["Audible Call<br/>Swap Linemen to Receivers mid-fight (15s cd)"]:::mid
+  D2{{"Debuff Crystal: Fatigue<br/>-10% Stamina Regen, +10% Crit Chance (summons & throws)"}}:::debuff
 
   %% Capstone
-  C1[Hail Mary<br/>Timed push: +3 Receivers +2 Linemen, formation rush]:::cap
-  C2[Two-Minute Drill<br/>Short burst: +30% Attack/Movespeed (teamwide)]:::cap
+  C1["Hail Mary<br/>Timed push: +3 Receivers +2 Linemen, formation rush"]:::cap
+  C2["Two-Minute Drill<br/>Short burst: +30% Attack/Move speed (teamwide)"]:::cap
 
   %% Edges
   A --> E1 --> M1 --> C1
@@ -35,8 +35,8 @@ flowchart TB
 
   %% Legend
   subgraph Legend
-    L1[Early Node]:::early
-    L2[Mid Node]:::mid
-    L3[Capstone]:::cap
-    L4{{Debuff Crystal}}:::debuff
+    L1["Early Node"]:::early
+    L2["Mid Node"]:::mid
+    L3["Capstone"]:::cap
+    L4{{"Debuff Crystal"}}:::debuff
   end
