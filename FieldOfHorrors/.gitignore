@@ -12,3 +12,7 @@ __pycache__/
 # Mermaid renders (CI will upload as artifacts)
 docs/diagrams/*.png
 docs/diagrams/*.svg
+!docs/diagrams/overview.svg
+
+!docs/diagrams/overview.svg
+!docs/diagrams/overview.svg

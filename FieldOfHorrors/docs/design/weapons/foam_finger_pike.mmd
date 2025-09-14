@@ -1,0 +1,16 @@
+%% Foam-Finger Pike – Upgrade Tree
+flowchart TD
+  FP0["Foam-Finger Pike (Base)"] --> FP1A["Tier1: Lunge Booster (+range)"]
+  FP0 --> FP1B["Tier1: Guard Point (startup armor)"]
+
+  FP1A --> FP2A["Tier2: Spear Wall (multi-hit line)"]
+  FP1A --> FP2B["Tier2: Pivot Stab (instant turn)"]
+
+  FP1B --> FP2C["Tier2: Riposte Window (parry → bonus)"]
+  FP1B --> FP2D["Tier2: Brace (reduced knockback)"]
+
+  %% Tier 3 caps
+  FP2A --> FP3A["Tier3: Phalanx (ally aura)"]
+  FP2B --> FP3B["Tier3: Whirl (short arc sweep)"]
+  FP2C --> FP3C["Tier3: Perfect Counter (auto-crit)"]
+  FP2D --> FP3D["Tier3: Iron Line (party guard)"]

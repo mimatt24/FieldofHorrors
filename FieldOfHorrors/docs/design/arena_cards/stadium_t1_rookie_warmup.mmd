@@ -1,0 +1,10 @@
+%% Stadium T1 – Rookie Warm-Up (Flow)
+flowchart TD
+  Start([Enter Arena]) --> W1[Wave 1: 2× Pitcher]
+  W1 -->|Clear| W2[Wave 2: 1× Pitcher + 1× Batter]
+  W2 -->|Clear| W3[Wave 3: 2× Batter]
+  W3 -->|Clear| Success([Success • Rewards])
+
+  Start -. "Timer 3:00" .-> T[Timer]
+  T -->|0:00| Fail([Fail])
+  Start -. "Team wipe" .-> Fail
