@@ -1,0 +1,24 @@
+stateDiagram-v2
+  [*] --> P1_FlagControl
+  P1_FlagControl: Phase 1 – Flag Control (100–70 HP)
+  P1_FlagControl --> P2_RulebookRage: HP <= 70%
+  P2_RulebookRage: Phase 2 – Rulebook Rage (70–35 HP)
+  P2_RulebookRage --> P3_OvertimeJudgment: HP <= 35%
+  P3_OvertimeJudgment: Phase 3 – Overtime Judgment (35–0 HP)
+  P3_OvertimeJudgment --> [*]: HP <= 0
+
+  note right of P1_FlagControl
+    Stun Flags, Whistle Shockwave,
+    Penalty Line, Ballboy Adds
+  end note
+
+  note right of P2_RulebookRage
+    Yellow Card Rain, Holding Tethers,
+    Replay Review (brief invuln), Ump DR Auras
+  end note
+
+  note right of P3_OvertimeJudgment
+    Two-Minute Drill (haste), Double Flag,
+    Ejection Teleport Slam, Soft Enrage
+  end note
+
