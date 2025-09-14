@@ -1,0 +1,6 @@
+* text=auto eol=lf
+*.mmd text
+*.md  text
+*.svg text
+*.png binary
+*.zip binary

@@ -1,0 +1,14 @@
+# Node / Python / build junk
+node_modules/
+dist/
+build/
+.cache/
+.venv/
+__pycache__/
+.DS_Store
+*.log
+# VSCode
+.vscode/*.code-workspace
+# Mermaid renders (CI will upload as artifacts)
+docs/diagrams/*.png
+docs/diagrams/*.svg

@@ -1,0 +1,18 @@
+name: Feature / Design item
+description: Track a new feature or design artifact
+labels: ["design"]
+body:
+  - type: input
+    id: area
+    attributes: { label: Area, placeholder: "telegraphs | arena | weapons | waves | co-op" }
+    validations: { required: true }
+  - type: textarea
+    id: objective
+    attributes: { label: Objective, placeholder: "What are we adding or changing?" }
+    validations: { required: true }
+  - type: textarea
+    id: acceptance
+    attributes: { label: Acceptance Criteria, placeholder: "- [ ] ..." }
+  - type: input
+    id: references
+    attributes: { label: References (chat_archive lines/URLs), placeholder: "docs/design/chat_archive.md#L123-L160" }
