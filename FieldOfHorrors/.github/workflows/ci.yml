@@ -4,22 +4,20 @@ on:
   push:
     paths:
       - 'design/**/*.mmd'
-      - 'design/**/*.md'
       - '.github/workflows/ci.yml'
   workflow_dispatch:
 
 jobs:
-  build-assets:
+  build-mermaid:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # allow pushing with GITHUB_TOKEN
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # ---------- Mermaid ----------
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -37,59 +35,22 @@ jobs:
             mmdc -i "$f" -o "$out"
           done
 
-      # ---------- Pandoc → PDF ----------
-      - name: Install Pandoc + wkhtmltopdf
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y pandoc wkhtmltopdf
-
-      - name: Render Markdown design docs to PDF
-        run: |
-          mkdir -p docs/out
-          shopt -s nullglob
-          for f in $(find design -type f -name "*.md"); do
-            base="$(basename "${f%.md}")"
-            out="docs/out/${base}.pdf"
-            echo "PDF: $f -> $out"
-            pandoc "$f" \
-              --from gfm \
-              -c docs/pandoc.css \
-              --pdf-engine=wkhtmltopdf \
-              --metadata title="Field of Horrors – ${base}" \
-              -o "$out"
-          done
-          echo "Generated PDFs:"
-          ls -l docs/out || true
-
-      # ---------- Upload artifacts ----------
-      - name: Upload Mermaid PNGs
+      - name: Upload PNGs as artifact
         uses: actions/upload-artifact@v4
         with:
           name: mermaid-diagrams
           path: art/autogen/*.png
           if-no-files-found: ignore
 
-      - name: Upload PDFs
-        uses: actions/upload-artifact@v4
-        with:
-          name: design-pdfs
-          path: docs/out/*.pdf
-          if-no-files-found: ignore
-
-      # ---------- Auto-commit generated files ----------
-      - name: Commit generated images and PDFs
+      - name: Commit generated images back to repo
         run: |
           set -e
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
           git add art/autogen/*.png || true
-          git add docs/out/*.pdf || true
-
           if git diff --cached --quiet; then
             echo "No changes to commit."
             exit 0
           fi
-
-          git commit -m "chore(autogen): update diagrams & PDFs [skip ci]"
+          git commit -m "chore(autogen): update Mermaid diagrams [skip ci]"
           git push
