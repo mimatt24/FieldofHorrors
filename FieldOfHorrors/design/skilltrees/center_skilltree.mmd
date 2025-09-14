@@ -1,0 +1,31 @@
+flowchart TB
+  %% Center – Control / AOE Slams
+  classDef early fill:#3c1c1c,stroke:#12100e,color:#eee,stroke-width:2px;
+  classDef mid fill:#5d3529,stroke:#12100e,color:#eee,stroke-width:2px;
+  classDef cap fill:#754c3f,stroke:#12100e,color:#eee,stroke-width:2px;
+  classDef debuff fill:#1c1214,stroke:#57cc11,color:#57cc11,stroke-dasharray: 5 3;
+
+  A[CENTER START<br/>Signature: Box Out, Slams, Grabs]:::early
+
+  %% Early
+  E1[Box Out I<br/>small knockback aura]:::early
+  E2[Hook Shot I<br/>short cone hit, minor stagger]:::early
+  E3[Rebounder I<br/>chance to auto-pull nearby pickups]:::early
+  D1{{Debuff: Heavy Shoes<br/>-8% Move, +AOE Damage}}:::debuff
+
+  %% Mid
+  M1[Box Out II<br/>aura grows, stronger knockback]:::mid
+  M2[Alley-Oop Grab<br/>pull enemies in then slam]:::mid
+  M3[Paint Dominance<br/>damage reduction while stationary]:::mid
+  D2{{Debuff: Glass Knees<br/>-Dodge i-frames, +Block Strength}}:::debuff
+
+  %% Capstone
+  C1[Slam of the Damned<br/>massive dunk AOE + gore shockwave]:::cap
+  C2[Hard Screen<br/>standing still reflects small damage]:::cap
+
+  A --> E1 --> M1 --> C1
+  A --> E2 --> M2 --> C1
+  A --> E3 --> M3 --> C2
+  E2 --> D1
+  M1 --> D2
+
