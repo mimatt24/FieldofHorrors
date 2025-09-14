@@ -13,3 +13,5 @@ __pycache__/
 docs/diagrams/*.png
 docs/diagrams/*.svg
 !docs/diagrams/overview.svg
+
+!docs/diagrams/overview.svg
