@@ -40,12 +40,36 @@ def check_telegraph_tables():
         lines = "\n".join(f"- {p}: missing '{k}'" for p, k in missing_files)
         fail(f"Telegraph tables missing required keys:\n{lines}")
 
+
+def check_arena_cards():
+    from pathlib import Path
+    AR = Path("docs/design/arena_cards")
+    if not AR.exists():
+        return
+    required_kv = ["Name:", "Tier:", "Biome:", "Recommended Power:", "Rewards:"]
+    required_sections = ["**Objective**", "**Modifiers**", "**Wave Plan (summary)**"]
+    errors = []
+    for md in AR.glob("*.md"):
+        txt = md.read_text(encoding="utf-8", errors="ignore")
+        # Metadata KV lines
+        for kv in required_kv:
+            if kv not in txt:
+                errors.append(f"{md}: missing metadata field '{kv}'")
+        # Sections
+        for sec in required_sections:
+            if sec not in txt:
+                errors.append(f"{md}: missing section '{sec}'")
+    if errors:
+        raise SystemExit("Arena card schema errors:\\n" + "\\n".join("- " + e for e in errors))
+
 def main():
+
     if not DESIGN.exists():
         print("No docs/design directory; skipping.", file=sys.stderr)
         return
     check_palette()
     check_telegraph_tables()
+    check_arena_cards()
     print("Design rules OK.")
 
 if __name__ == "__main__":
