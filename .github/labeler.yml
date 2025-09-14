@@ -1,0 +1,27 @@
+type:design:
+  - changed-files:
+      - any-glob-to-any-file: ['FieldOfHorrors/docs/design/**','FieldOfHorrors/docs/diagrams/**']
+type:docs:
+  - changed-files:
+      - any-glob-to-any-file: ['**/*.md','**/*.mmd']
+type:chore:
+  - changed-files:
+      - any-glob-to-any-file: ['.github/**','FieldOfHorrors/tools/**']
+area:arena:
+  - changed-files:
+      - any-glob-to-any-file: ['FieldOfHorrors/docs/design/arena_cards/**']
+area:weapons:
+  - changed-files:
+      - any-glob-to-any-file: ['FieldOfHorrors/docs/design/weapons/**']
+area:telegraphs:
+  - changed-files:
+      - any-glob-to-any-file: ['FieldOfHorrors/docs/design/telegraphs/**']
+area:ux:
+  - changed-files:
+      - any-glob-to-any-file: ['FieldOfHorrors/docs/ux/**']
+area:telemetry:
+  - changed-files:
+      - any-glob-to-any-file: ['FieldOfHorrors/docs/telemetry/**','FieldOfHorrors/tools/validate_design_rules.py']
+area:narrative:
+  - changed-files:
+      - any-glob-to-any-file: ['FieldOfHorrors/docs/narrative/**']
