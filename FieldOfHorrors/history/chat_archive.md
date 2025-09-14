@@ -256,3 +256,9 @@ All concept art (weapons, characters, base) adheres to palette.
 # Usage
 - Reference this file when starting any **new ChatGPT project window**:
   > “This is my design archive: https://github.com/mimatt24/FieldofHorrors/blob/main/FieldOfHorrors/history/chat_archive.md. Load this and continue development from here.”
+
+---
+
+## Changelog Index
+- See **history/changelog/** for dated, detailed daily logs.
+- Latest: [2025-09-13](history/changelog/2025-09-13.md)
