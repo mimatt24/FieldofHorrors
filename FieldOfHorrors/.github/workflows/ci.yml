@@ -22,11 +22,19 @@ jobs:
         run: codespell -S "node_modules,**/*.png,**/*.svg,.git" -L mermaid,telegraph,co-op
       - name: Link check
         run: lychee --no-progress --cache --max-concurrency 8 "**/*.md" || true
-      - name: Render mermaid (if present)
+      - name: Render all Mermaid sources (if present)
         run: |
           mkdir -p docs/diagrams
-          if [ -f docs/design/diagrams.mmd ]; then
-            npx mmdc -i docs/design/diagrams.mmd -o docs/diagrams/diagrams.svg
+          mapfile -t MMD < <(git ls-files '**/*.mmd' || true)
+          if [ "${#MMD[@]}" -gt 0 ]; then
+            for f in "${MMD[@]}"; do
+              base="$(basename "$f" .mmd)"
+              out="docs/diagrams/${base}.svg"
+              echo "Rendering $f -> $out"
+              npx mmdc -i "$f" -o "$out" || exit 1
+            done
+          else
+            echo "No .mmd files found. Skipping."
           fi
       - name: Validate design rules
         run: python tools/validate_design_rules.py

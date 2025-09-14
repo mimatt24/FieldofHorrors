@@ -1,0 +1,16 @@
+%% Whistle Bomb – Upgrade Tree
+flowchart TD
+  WB0["Whistle Bomb (Base)"] --> WB1A["Tier1: Sticky Fuse (+DoT)"]
+  WB0 --> WB1B["Tier1: Quick Whistle (-startup)"]
+
+  WB1A --> WB2A["Tier2: Cluster Pop (split on hit)"]
+  WB1A --> WB2B["Tier2: Siren Pitch (fear on near-miss)"]
+
+  WB1B --> WB2C["Tier2: Curve Throw (manual curve)"]
+  WB1B --> WB2D["Tier2: Silent Fuse (no tell)"]
+
+  %% Tier 3 caps (choose one)
+  WB2A --> WB3A["Tier3: Grand Slam (large AoE, longer cooldown)"]
+  WB2B --> WB3B["Tier3: Panic Chain (fear spreads)"]
+  WB2C --> WB3C["Tier3: Perfect Spiral (pierce)"]
+  WB2D --> WB3D["Tier3: Ghost Fuse (invisible arc, lower damage)"]
