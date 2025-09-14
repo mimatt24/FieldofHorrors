@@ -6,27 +6,45 @@ AC["arena_cards"]
 W["weapons"]
 CA["chat_archive.md TODO"]
 OT["open_threads.md ✅"]
-DGM["docs/diagrams (CI artifacts)"]
-subgraph TSG["telegraphs/"]
-  TP["pitcher.md ✅"]
-  TB["batter.md ✅"]
-  TL["linebacker.md ✅"]
-  TQ["qb.md ✅"]
-end
-subgraph ACG["arena_cards/"]
-  S1MD["stadium_t1_rookie_warmup.md ✅"]
-  S1MMD["stadium_t1_rookie_warmup.mmd ✅"]
-end
-subgraph WG["weapons/"]
-  WB["whistle_bomb.mmd ✅"]
-  FP["foam_finger_pike.mmd ✅"]
-end
+DGM["diagrams (CI artifacts)"]
 A --> DG
 A --> AC
 A --> W
 A --> CA
 A --> OT
 A -. rendered by CI .-> DGM
+subgraph CLASSES["Classes"]
+  C_P["Pitcher"]
+  C_B["Batter"]
+  C_L["Linebacker"]
+  C_Q["Quarterback"]
+end
+subgraph TSG["telegraphs"]
+  T_pitcher_md["pitcher.md ✅"]
+  T_batter_md["batter.md ✅"]
+  T_linebacker_md["linebacker.md ✅"]
+  T_qb_md["qb.md ✅"]
+  T_README_md["README.md ✅"]
+end
+subgraph ACG["arena_cards"]
+  A_template_md["template.md ✅"]
+  A_stadium_t1_rookie_warmup_md["stadium_t1_rookie_warmup.md ✅"]
+  A_stadium_t1_rookie_warmup_mmd["stadium_t1_rookie_warmup.mmd ✅"]
+end
+subgraph WG["weapons"]
+  W_whistle_bomb_mmd["whistle_bomb.mmd ✅"]
+  W_foam_finger_pike_mmd["foam_finger_pike.mmd ✅"]
+  W_shoulder_ram_mmd["shoulder_ram.mmd TODO"]
+  W_spiral_disc_mmd["spiral_disc.mmd TODO"]
+end
+C_P --> W_whistle_bomb_mmd
+C_B --> W_foam_finger_pike_mmd
+C_L --> W_shoulder_ram_mmd
+C_Q --> W_spiral_disc_mmd
+W_whistle_bomb_mmd --> A_stadium_t1_rookie_warmup_md
+W_foam_finger_pike_mmd --> A_stadium_t1_rookie_warmup_md
+W_shoulder_ram_mmd --> A_stadium_t1_rookie_warmup_md
+W_spiral_disc_mmd --> A_stadium_t1_rookie_warmup_md
 ST1SVG["stadium_t1_rookie_warmup.svg"]
 WBSVG["whistle_bomb.svg"]
 FPSVG["foam_finger_pike.svg"]
