@@ -22,3 +22,12 @@ Roguelike sports‑horror game — design, code, art, music, and docs.
 ## Conventions
 - Use Git LFS for large binaries (PNG/JPG/WAV/MP4).
 - Avoid committing very large files directly to `main`.
+
+## Build Status
+![CI](https://github.com/mimatt24/FieldofHorrors/actions/workflows/ci.yml/badge.svg)
+
+- View runs: https://github.com/mimatt24/FieldofHorrors/actions
+- Auto-generated outputs:
+  - Diagrams: `art/autogen/*.png`
+  - PDFs: `docs/out/*.pdf`
+
