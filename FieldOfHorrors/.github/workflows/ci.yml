@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    paths:
+      - 'design/**/*.mmd'
+      - '.github/workflows/ci.yml'
+  workflow_dispatch:
+
+jobs:
+  generate-mermaid-pngs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Mermaid CLI
+        run: npm install -g @mermaid-js/mermaid-cli
+
+      - name: Generate Mermaid PNGs
+        run: |
+          mkdir -p art/autogen
+          # Render every .mmd in design/ (and subfolders) to art/autogen/<same name>.png
+          find design -type f -name "*.mmd" | while read f; do
+            out="art/autogen/$(basename "${f%.mmd}").png"
+            echo "Rendering $f -> $out"
+            mmdc -i "$f" -o "$out"
+          done
+
+      - name: Upload PNGs as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mermaid-diagrams
+          path: art/autogen/*.png
