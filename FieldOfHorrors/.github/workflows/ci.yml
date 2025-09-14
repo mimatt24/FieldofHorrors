@@ -1,56 +1,41 @@
 name: CI
-
 on:
+  pull_request:
   push:
-    paths:
-      - 'design/**/*.mmd'
-      - '.github/workflows/ci.yml'
-  workflow_dispatch:
-
+    branches: [main]
 jobs:
-  build-mermaid:
+  validate:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install Mermaid CLI
-        run: npm install -g @mermaid-js/mermaid-cli
-
-      - name: Generate Mermaid PNGs
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - name: Install tooling
         run: |
-          mkdir -p art/autogen
-          find design -type f -name "*.mmd" | while read f; do
-            out="art/autogen/$(basename "${f%.mmd}").png"
-            echo "Rendering $f -> $out"
-            mmdc -i "$f" -o "$out"
-          done
-
-      - name: Upload PNGs as artifact
+          pip install codespell
+          npm i -g @mermaid-js/mermaid-cli lychee-link-checker markdownlint-cli
+      - name: Lint markdown
+        run: markdownlint "**/*.md"
+      - name: Spell check
+        run: codespell -S "node_modules,**/*.png,**/*.svg,.git" -L mermaid,telegraph,co-op
+      - name: Link check
+        run: lychee --no-progress --cache --max-concurrency 8 "**/*.md" || true
+      - name: Render mermaid (if present)
+        run: |
+          mkdir -p docs/diagrams
+          if [ -f docs/design/diagrams.mmd ]; then
+            npx mmdc -i docs/design/diagrams.mmd -o docs/diagrams/diagrams.svg
+          fi
+      - name: Validate design rules
+        run: python tools/validate_design_rules.py
+      - name: Upload docs preview
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: mermaid-diagrams
-          path: art/autogen/*.png
+          name: docs-preview
+          path: |
+            docs/diagrams/**
+            docs/design/**
           if-no-files-found: ignore
-
-      - name: Commit generated images back to repo
-        run: |
-          set -e
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add art/autogen/*.png || true
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
-            exit 0
-          fi
-          git commit -m "chore(autogen): update Mermaid diagrams [skip ci]"
-          git push
