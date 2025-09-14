@@ -1,0 +1,24 @@
+name: Build Chat Bundle
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "FieldOfHorrors/**"
+      - ".github/workflows/chat_bundle.yml"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build bundle
+      run: |
+        python3 FieldOfHorrors/tools/make_chat_bundle.py || true
+    - name: Commit bundle
+      run: |
+        git config user.name "foh-bot"
+        git config user.email "foh-bot@example.com"
+        if [ -n "$(git status --porcelain)" ]; then
+          git add FieldOfHorrors/docs/chat_bundle/bundle.md
+          git commit -m "CI: rebuild chat bundle"
+          git push
+        fi
