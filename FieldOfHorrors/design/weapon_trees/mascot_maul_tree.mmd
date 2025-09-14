@@ -1,0 +1,19 @@
+flowchart TD
+  %% Mascot Maul – deterministic crafting path
+  classDef base fill:#3c1c1c,stroke:#12100e,color:#eee,stroke-width:2px;
+  classDef mid fill:#5d3529,stroke:#12100e,color:#eee,stroke-width:2px;
+  classDef rare fill:#754c3f,stroke:#12100e,color:#eee,stroke-width:2px;
+
+  M0["Prop Mascot Head (foam)"]:::base
+  M1["Mascot Maul"]:::base
+  M2["Reinforced Mascot Maul"]:::mid
+  M3["Electrified Mascot Maul"]:::mid
+  M4["Legendary Mascot Helm"]:::rare
+
+  Q1{{"Recipe: Foam Core + Duct Tape"}}
+  Q2{{"Recipe: Steel Rod + Resin"}}
+  Q3{{"Recipe: Capacitor + Wiring"}}
+  Q4{{"Recipe: Championship Gem Shard + Trophy"}}
+
+  M0 -->|Q1| M1 -->|Q2| M2 -->|Q3| M3 -->|Q4| M4
+
