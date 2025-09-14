@@ -1,0 +1,23 @@
+# Power Forward
+**Role:** AOE/Zone Control  
+**Movement:** SPD 5.9 • **HP:** 120 • **Grit Cap:** 30 • **Armor:** Medium
+
+## Default Weapons
+- Primary: (see weapons/)
+- Secondary: (see weapons/ or gadget)
+
+## Signature
+- Box Out – ring slow; -20% enemy melee inside
+
+## Skills
+1. (Skill A) – …
+2. (Skill B) – …
+3. (Ultimate) – …
+
+## Perks (early picks)
+- Node A: …
+- Node B: …
+- Node C: …
+
+## Tips
+- …

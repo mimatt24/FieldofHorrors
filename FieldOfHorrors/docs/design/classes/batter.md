@@ -1,0 +1,23 @@
+# Batter
+**Role:** Bruiser/Breaker  
+**Movement:** SPD 5.8 • **HP:** 125 • **Grit Cap:** 35 • **Armor:** Medium
+
+## Default Weapons
+- Primary: (see weapons/)
+- Secondary: (see weapons/ or gadget)
+
+## Signature
+- Power Swing – cone hit, Knockdown on armored/marked
+
+## Skills
+1. (Skill A) – …
+2. (Skill B) – …
+3. (Ultimate) – …
+
+## Perks (early picks)
+- Node A: …
+- Node B: …
+- Node C: …
+
+## Tips
+- …

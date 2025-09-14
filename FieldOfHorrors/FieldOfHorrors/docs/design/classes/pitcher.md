@@ -1,0 +1,23 @@
+# Pitcher
+**Role:** Skirmisher/Controller  
+**Movement:** SPD 6.1 • **HP:** 100 • **Grit Cap:** 25 • **Armor:** Light
+
+## Default Weapons
+- Primary: (see weapons/)
+- Secondary: (see weapons/ or gadget)
+
+## Signature
+- Curveball – arced throw that Marks targets (+15% team dmg, 4s)
+
+## Skills
+1. (Skill A) – …
+2. (Skill B) – …
+3. (Ultimate) – …
+
+## Perks (early picks)
+- Node A: …
+- Node B: …
+- Node C: …
+
+## Tips
+- …

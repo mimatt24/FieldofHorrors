@@ -1,0 +1,23 @@
+# QB
+**Role:** Summoner/Field General  
+**Movement:** SPD 6.0 • **HP:** 100 • **Grit Cap:** 20 • **Armor:** Light
+
+## Default Weapons
+- Primary: (see weapons/)
+- Secondary: (see weapons/ or gadget)
+
+## Signature
+- Audible – swap summons (Receiver/Fullback/Kicker)
+
+## Skills
+1. (Skill A) – …
+2. (Skill B) – …
+3. (Ultimate) – …
+
+## Perks (early picks)
+- Node A: …
+- Node B: …
+- Node C: …
+
+## Tips
+- …
