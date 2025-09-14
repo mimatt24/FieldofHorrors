@@ -1,0 +1,25 @@
+name: Build Bundles
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch: {}
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build bundles
+        run: bash tools/build_bundles.sh
+      - name: Commit bundles
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "ci: auto-build canonical bundles"
+          branch: ${{ github.ref_name }}
+          file_pattern: |
+            FieldOfHorrors/docs/_bundle/ALL_DOCS.md
+            history/_bundle/ALL_LOGS.md
+            _bundle/ALL_TEXT_SNAPSHOT.md
