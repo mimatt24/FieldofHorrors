@@ -1,0 +1,42 @@
+%% Field of Horrors – Design Overview
+flowchart TD
+  A["docs/design"] --> DG["telegraphs/"]
+  A --> AC["arena_cards/"]
+  A --> W["weapons/"]
+  A --> CA["chat_archive.md"]
+  A --> OT["open_threads.md"]
+
+  %% TELEGRAPHS
+  subgraph "telegraphs/"
+    P["pitcher.md"]
+    B["batter.md"]
+    L["linebacker.md"]
+    Q["qb.md"]
+  end
+  DG --- P
+  DG --- B
+  DG --- L
+  DG --- Q
+
+  %% ARENA CARDS
+  subgraph "arena_cards/"
+    ST1MD["stadium_t1_rookie_warmup.md"]
+    ST1MMD["stadium_t1_rookie_warmup.mmd"]
+  end
+  AC --- ST1MD
+  AC --- ST1MMD
+
+  %% WEAPONS
+  subgraph "weapons/"
+    WB["whistle_bomb.mmd"]
+    FP["foam_finger_pike.mmd"]
+  end
+  W --- WB
+  W --- FP
+
+  %% RENDERED ARTIFACTS
+  D["docs/diagrams"]
+  A -. "rendered by CI" .-> D
+  D --> ST1SVG["stadium_t1_rookie_warmup.svg"]
+  D --> WBSVG["whistle_bomb.svg"]
+  D --> FPSVG["foam_finger_pike.svg"]
