@@ -1,0 +1,19 @@
+# Lychee configuration
+timeout = 10
+max-concurrency = 8
+retry-wait-time = 2
+user-agent = "FieldOfHorrors-LinkCheck/1.0"
+
+# Only scan docs by default (but action passes '.' so everything; keep include here for local runs)
+include = ["FieldOfHorrors/docs/**", ".github/**", "README.md"]
+
+# Exclusions (add if certain domains rate-limit)
+exclude = [
+  "localhost",
+  "127.0.0.1",
+  "0.0.0.0",
+  "example.com"
+]
+
+# Accept 429/403 on some hosts (comment out if too lenient)
+accept = [429, 403]
