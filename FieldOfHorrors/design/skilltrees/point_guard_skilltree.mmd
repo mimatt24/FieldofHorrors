@@ -5,27 +5,19 @@ flowchart TB
   classDef cap fill:#754c3f,stroke:#12100e,color:#eee,stroke-width:2px;
   classDef debuff fill:#1c1214,stroke:#57cc11,color:#57cc11,stroke-dasharray: 5 3;
 
-  A[POINT GUARD START<br/>Signature: Dashes & Buff Passes]:::early
+  A["POINT GUARD START<br/>Signature: Dashes & Buff Passes"]:::early
 
   %% Early
-  E1[Cross-Over Dash I<br/>+1 dash, short i-frames]:::early
-  E2[No-Look Pass I<br/>buff: +10% AS to ally/summon]:::early
-  E3[Floor General I<br/>+5% team movespeed (aura)]:::early
-  D1{{Debuff: Light Frame<br/>-10% Max HP, +10% Move}}:::debuff
+  E1["Cross-Over Dash I<br/>+1 dash, short i-frames"]:::early
+  E2["No-Look Pass I<br/>buff: +10 pct attack speed to ally/summon"]:::early
+  E3["Floor General I<br/>+5 pct team move speed (aura)"]:::early
+  D1{{"Debuff: Light Frame<br/>-10 pct Max HP, +10 pct Move Speed"}}:::debuff
 
   %% Mid
-  M1[Cross-Over Dash II<br/>leaves slow field behind]:::mid
-  M2[No-Look Pass II<br/>+small heal on pass target]:::mid
-  M3[Pick-and-Roll<br/>dash through enemies = brief stun]:::mid
-  D2{{Debuff: Fatigue<br/>-Stamina Regen, +Crit Chance}}:::debuff
+  M1["Cross-Over Dash II<br/>leaves slow field behind"]:::mid
+  M2["No-Look Pass II<br/>adds small heal on pass target"]:::mid
+  M3["Pick-and-Roll<br/>dash-through causes brief stun"]:::mid
+  D2{{"Debuff: Fatigue<br/>-Stamina Regen, +Crit Chance"}}:::debuff
 
   %% Capstone
-  C1[Full Court Press<br/>Enemies slowed, team sped up (10s)]:::cap
-  C2[Fast Break<br/>On elite kill: refresh dash + team haste]:::cap
-
-  A --> E1 --> M1 --> C1
-  A --> E2 --> M2 --> C1
-  A --> E3 --> M3 --> C2
-  E1 --> D1
-  M2 --> D2
 
