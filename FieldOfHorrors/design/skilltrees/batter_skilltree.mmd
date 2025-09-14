@@ -1,0 +1,27 @@
+flowchart TB
+  %% Batter – Melee Crit Fighter
+  classDef early fill:#3c1c1c,stroke:#12100e,color:#eee,stroke-width:2px;
+  classDef mid fill:#5d3529,stroke:#12100e,color:#eee,stroke-width:2px;
+  classDef cap fill:#754c3f,stroke:#12100e,color:#eee,stroke-width:2px;
+  classDef debuff fill:#1c1214,stroke:#57cc11,color:#57cc11,stroke-dasharray: 5 3;
+
+  A[BATTER START<br/>Signature: Melee Combos, Timed Crits]:::early
+
+  E1[Home Run Timing I<br/>Perfect-timed hit = +50% Crit]:::early
+  E2[Line Drive I<br/>3-hit combo, last hit +knockback]:::early
+  E3[Pit Grip I<br/>-10% Stamina Cost on swings]:::early
+  D1{{Debuff: Heavy Bat<br/>-8% Move Speed, +12% Bat Damage}}:::debuff
+
+  M1[Home Run Timing II<br/>Perfect hit creates shockwave]:::mid
+  M2[Line Drive II<br/>Combo finishers cleave nearby foes]:::mid
+  M3[Pit Grip II<br/>-20% Stamina Cost, +5% Attack Speed]:::mid
+  D2{{Debuff: Glass Hands<br/>-10% Block/Parry, +15% Crit Damage}}:::debuff
+
+  C1[Blood Diamond Bat<br/>Final combo hit = Guaranteed Crit + Bleed]:::cap
+  C2[Slugger’s Rage<br/>10s Enrage on killstreak: +AS, +Move]:::cap
+
+  A --> E1 --> M1 --> C1
+  A --> E2 --> M2 --> C1
+  A --> E3 --> M3 --> C2
+  E1 --> D1
+  M2 --> D2
