@@ -17,6 +17,7 @@ def main():
     tele_files  = ["pitcher.md","batter.md","linebacker.md","qb.md","README.md"]
     arena_files = ["template.md","stadium_t1_rookie_warmup.md","stadium_t1_rookie_warmup.mmd"]
     weapon_files= ["whistle_bomb.mmd","foam_finger_pike.mmd","shoulder_ram.mmd","spiral_disc.mmd"]
+    weapon_stats= ["whistle_bomb.md","foam_finger_pike.md","shoulder_ram.md","spiral_disc.md"]
 
     lines = []
     lines.append("%% Field of Horrors – Design Overview (auto-generated)")
@@ -64,10 +65,16 @@ def main():
 
     # --- WEAPONS
     lines.append('subgraph WG["weapons"]')
+    # Stat docs (md)
     weapon_ids = {}
     for name in weapon_files:
         the_id = nid("W", name)
         weapon_ids[name] = the_id
+        lines.append(f'  {the_id}["{name} {ok(weap / name)}"]')
+
+    # Stat docs (md)
+    for name in weapon_stats:
+        the_id = nid("WS", name)
         lines.append(f'  {the_id}["{name} {ok(weap / name)}"]')
     lines.append("end")
 

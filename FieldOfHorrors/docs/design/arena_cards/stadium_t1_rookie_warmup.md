@@ -40,3 +40,10 @@ flowchart TD
   T -->|0:00| Fail([Fail])
   Start -. "Team wipe" .-> Fail
 
+
+
+## Player Loadouts (Baseline Weapons)
+- Pitcher: [Whistle Bomb](../weapons/whistle_bomb.md)
+- Batter:  [Foam-Finger Pike](../weapons/foam_finger_pike.md)
+- Linebacker: [Shoulder Ram](../weapons/shoulder_ram.md)
+- Quarterback: [Spiral Disc](../weapons/spiral_disc.md)
