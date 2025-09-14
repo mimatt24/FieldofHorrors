@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -Eeuo pipefail
+set -euo pipefail
 ROOT="FieldOfHorrors/docs"
 OUT="$ROOT/_bundle/ALL_DOCS.md"
 mkdir -p "$ROOT/_bundle"

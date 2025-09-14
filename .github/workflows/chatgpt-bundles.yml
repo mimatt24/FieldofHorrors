@@ -1,0 +1,51 @@
+name: chatgpt-bundles
+on:
+  push:
+    branches: ["**"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  build-and-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+
+      - name: Build design bundle
+        run: |
+          bash FieldOfHorrors/tools/bundle_docs.sh
+
+      - name: Build logs bundle
+        run: |
+          bash FieldOfHorrors/tools/bundle_logs.sh
+
+      - name: Ensure CHATGPT_INDEX.md
+        run: |
+          test -f CHATGPT_INDEX.md || cat > CHATGPT_INDEX.md <<'MD'
+          # Field Of Horrors — ChatGPT Discovery Index
+          - Design bundle: `FieldOfHorrors/docs/_bundle/ALL_DOCS.md`
+          - Logs bundle: `history/_bundle/ALL_LOGS.md`
+          - Classes: `FieldOfHorrors/docs/design/classes/`
+          - Systems: `FieldOfHorrors/docs/design/systems/`
+          - Weapons/Skills: `FieldOfHorrors/docs/design/{weapons,skills}/`
+          - Arena cards: `FieldOfHorrors/docs/design/arena_cards/`
+          - Data: `FieldOfHorrors/data/`
+          MD
+
+      - name: Create/Update PR to main
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "Docs: refresh ChatGPT bundles & index (auto)"
+          title: "Docs: refresh ChatGPT bundles & index (auto)"
+          body: |
+            Auto-generated:
+            - FieldOfHorrors/docs/_bundle/ALL_DOCS.md
+            - history/_bundle/ALL_LOGS.md
+            - CHATGPT_INDEX.md (root)
+          branch: automation/chatgpt-bundles
+          base: main
+          delete-branch: true

@@ -11,5 +11,3 @@ Shortcuts:
 - Weapons/Skills: `FieldOfHorrors/docs/design/{weapons,skills}/`
 - Arena cards: `FieldOfHorrors/docs/design/arena_cards/`
 - Data stubs: `FieldOfHorrors/data/`
-
-> Refresh locally: `bash FieldOfHorrors/tools/bundle_docs.sh` then commit.
