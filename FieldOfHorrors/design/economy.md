@@ -25,3 +25,4 @@
 - Seasonal cosmetics remain **cosmetic-only**
 
 - CSS test Sun Sep 14 03:24:50 UTC 2025
+- CI PDF path test Sun Sep 14 03:37:06 UTC 2025
