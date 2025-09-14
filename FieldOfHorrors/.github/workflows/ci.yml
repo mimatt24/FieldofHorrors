@@ -45,16 +45,20 @@ jobs:
           sudo apt-get install -y pandoc wkhtmltopdf
 
       - name: Render Markdown design docs to PDF
-        run: |
-          mkdir -p docs/out
-          shopt -s nullglob
-          for f in $(find design -type f -name "*.md"); do
-            base="$(basename "${f%.md}")"
-            out="docs/out/${base}.pdf"
-            echo "PDF: $f -> $out"
-            # --from gfm handles GitHub-flavored markdown; wkhtmltopdf is the pdf engine
-            pandoc "$f" --from gfm -o "$out" --pdf-engine=wkhtmltopdf
-          done
+  run: |
+    mkdir -p docs/out
+    shopt -s nullglob
+    for f in $(find design -type f -name "*.md"); do
+      base="$(basename "${f%.md}")"
+      out="docs/out/${base}.pdf"
+      echo "PDF: $f -> $out"
+      pandoc "$f" \
+        --from gfm \
+        -c docs/pandoc.css \
+        --pdf-engine=wkhtmltopdf \
+        --metadata title="Field of Horrors – ${base}" \
+        -o "$out"
+    done
 
       # ---------- Upload artifacts for convenience ----------
       - name: Upload Mermaid PNGs
