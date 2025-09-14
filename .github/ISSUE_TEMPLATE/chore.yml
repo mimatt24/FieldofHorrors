@@ -1,0 +1,16 @@
+name: Chore
+description: Repo hygiene / tooling work
+labels: ["chore"]
+body:
+  -
+
+  - type: input
+    id: summary
+    attributes: { label: Summary }
+    validations: { required: true }
+  - type: textarea
+    id: steps
+    attributes: { label: Steps to Reproduce }
+  - type: textarea
+    id: expected
+    attributes: { label: Expected vs Actual }
