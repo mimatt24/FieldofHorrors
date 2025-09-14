@@ -1,0 +1,14 @@
+name: Design Task
+description: Plan and track a design task
+labels: ["design"]
+body:
+  - type: input
+    id: summary
+    attributes: { label: Summary }
+    validations: { required: true }
+  - type: textarea
+    id: goals
+    attributes: { label: Goals / Acceptance Criteria }
+  - type: textarea
+    id: links
+    attributes: { label: Related docs/links }
