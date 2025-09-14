@@ -3,8 +3,8 @@ name: CI
 on:
   push:
     paths:
-      - 'design/**/*.mmd'
-      - 'design/**/*.md'
+      - 'FieldOfHorrors/design/**/*.mmd'
+      - 'FieldOfHorrors/design/**/*.md'
       - '.github/workflows/ci.yml'
   workflow_dispatch:
 
@@ -12,12 +12,12 @@ jobs:
   build-assets:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # allow pushing with GITHUB_TOKEN
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # required for committing/pushing
+          fetch-depth: 0
 
       # ---------- Mermaid ----------
       - name: Set up Node.js
@@ -30,10 +30,10 @@ jobs:
 
       - name: Generate Mermaid PNGs
         run: |
-          mkdir -p art/autogen
-          # Render every .mmd in design/ (and subfolders) to art/autogen/<same name>.png
-          find design -type f -name "*.mmd" | while read f; do
-            out="art/autogen/$(basename "${f%.mmd}").png"
+          mkdir -p FieldOfHorrors/art/autogen
+          # Render every .mmd under FieldOfHorrors/design to FieldOfHorrors/art/autogen/<name>.png
+          find FieldOfHorrors/design -type f -name "*.mmd" | while read f; do
+            out="FieldOfHorrors/art/autogen/$(basename "${f%.mmd}").png"
             echo "Rendering $f -> $out"
             mmdc -i "$f" -o "$out"
           done
@@ -45,34 +45,36 @@ jobs:
           sudo apt-get install -y pandoc wkhtmltopdf
 
       - name: Render Markdown design docs to PDF
-  run: |
-    mkdir -p docs/out
-    shopt -s nullglob
-    for f in $(find design -type f -name "*.md"); do
-      base="$(basename "${f%.md}")"
-      out="docs/out/${base}.pdf"
-      echo "PDF: $f -> $out"
-      pandoc "$f" \
-        --from gfm \
-        -c docs/pandoc.css \
-        --pdf-engine=wkhtmltopdf \
-        --metadata title="Field of Horrors – ${base}" \
-        -o "$out"
-    done
+        run: |
+          mkdir -p FieldOfHorrors/docs/out
+          shopt -s nullglob
+          for f in $(find FieldOfHorrors/design -type f -name "*.md"); do
+            base="$(basename "${f%.md}")"
+            out="FieldOfHorrors/docs/out/${base}.pdf"
+            echo "PDF: $f -> $out"
+            pandoc "$f" \
+              --from gfm \
+              -c FieldOfHorrors/docs/pandoc.css \
+              --pdf-engine=wkhtmltopdf \
+              --metadata title="Field of Horrors – ${base}" \
+              -o "$out"
+          done
+          echo "Generated PDFs:"
+          ls -l FieldOfHorrors/docs/out || true
 
-      # ---------- Upload artifacts for convenience ----------
+      # ---------- Upload artifacts ----------
       - name: Upload Mermaid PNGs
         uses: actions/upload-artifact@v4
         with:
           name: mermaid-diagrams
-          path: art/autogen/*.png
+          path: FieldOfHorrors/art/autogen/*.png
           if-no-files-found: ignore
 
       - name: Upload PDFs
         uses: actions/upload-artifact@v4
         with:
           name: design-pdfs
-          path: docs/out/*.pdf
+          path: FieldOfHorrors/docs/out/*.pdf
           if-no-files-found: ignore
 
       # ---------- Auto-commit generated files ----------
@@ -82,11 +84,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # Stage only autogen outputs so we don't pollute history
-          git add art/autogen/*.png || true
-          git add docs/out/*.pdf || true
+          git add FieldOfHorrors/art/autogen/*.png || true
+          git add FieldOfHorrors/docs/out/*.pdf || true
 
-          # If nothing new, exit quietly
           if git diff --cached --quiet; then
             echo "No changes to commit."
             exit 0
