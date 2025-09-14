@@ -3,8 +3,8 @@ name: CI
 on:
   push:
     paths:
-      - 'FieldOfHorrors/design/**/*.mmd'
-      - 'FieldOfHorrors/design/**/*.md'
+      - 'design/**/*.mmd'
+      - 'design/**/*.md'
       - '.github/workflows/ci.yml'
   workflow_dispatch:
 
@@ -12,7 +12,7 @@ jobs:
   build-assets:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write  # allow pushing with GITHUB_TOKEN
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -30,10 +30,9 @@ jobs:
 
       - name: Generate Mermaid PNGs
         run: |
-          mkdir -p FieldOfHorrors/art/autogen
-          # Render every .mmd under FieldOfHorrors/design to FieldOfHorrors/art/autogen/<name>.png
-          find FieldOfHorrors/design -type f -name "*.mmd" | while read f; do
-            out="FieldOfHorrors/art/autogen/$(basename "${f%.mmd}").png"
+          mkdir -p art/autogen
+          find design -type f -name "*.mmd" | while read f; do
+            out="art/autogen/$(basename "${f%.mmd}").png"
             echo "Rendering $f -> $out"
             mmdc -i "$f" -o "$out"
           done
@@ -46,35 +45,35 @@ jobs:
 
       - name: Render Markdown design docs to PDF
         run: |
-          mkdir -p FieldOfHorrors/docs/out
+          mkdir -p docs/out
           shopt -s nullglob
-          for f in $(find FieldOfHorrors/design -type f -name "*.md"); do
+          for f in $(find design -type f -name "*.md"); do
             base="$(basename "${f%.md}")"
-            out="FieldOfHorrors/docs/out/${base}.pdf"
+            out="docs/out/${base}.pdf"
             echo "PDF: $f -> $out"
             pandoc "$f" \
               --from gfm \
-              -c FieldOfHorrors/docs/pandoc.css \
+              -c docs/pandoc.css \
               --pdf-engine=wkhtmltopdf \
               --metadata title="Field of Horrors – ${base}" \
               -o "$out"
           done
           echo "Generated PDFs:"
-          ls -l FieldOfHorrors/docs/out || true
+          ls -l docs/out || true
 
       # ---------- Upload artifacts ----------
       - name: Upload Mermaid PNGs
         uses: actions/upload-artifact@v4
         with:
           name: mermaid-diagrams
-          path: FieldOfHorrors/art/autogen/*.png
+          path: art/autogen/*.png
           if-no-files-found: ignore
 
       - name: Upload PDFs
         uses: actions/upload-artifact@v4
         with:
           name: design-pdfs
-          path: FieldOfHorrors/docs/out/*.pdf
+          path: docs/out/*.pdf
           if-no-files-found: ignore
 
       # ---------- Auto-commit generated files ----------
@@ -84,8 +83,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add FieldOfHorrors/art/autogen/*.png || true
-          git add FieldOfHorrors/docs/out/*.pdf || true
+          git add art/autogen/*.png || true
+          git add docs/out/*.pdf || true
 
           if git diff --cached --quiet; then
             echo "No changes to commit."
