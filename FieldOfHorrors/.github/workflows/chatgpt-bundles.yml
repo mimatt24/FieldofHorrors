@@ -1,0 +1,97 @@
+name: chatgpt-bundles
+on:
+  push:
+    branches: ["**"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  build-validate-and-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+
+      - name: Install jq (for validation)
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Build design bundle
+        run: bash FieldOfHorrors/tools/bundle_docs.sh
+
+      - name: Build logs bundle
+        run: bash FieldOfHorrors/tools/bundle_logs.sh || echo "No logs yet"
+
+      - name: Build full text snapshot
+        run: bash FieldOfHorrors/tools/bundle_everything.sh
+
+      - name: Ensure CHATGPT_INDEX.md
+        run: |
+          test -f CHATGPT_INDEX.md || cat > CHATGPT_INDEX.md <<'MD'
+          # Field Of Horrors — ChatGPT Discovery Index
+          - Design bundle: `FieldOfHorrors/docs/_bundle/ALL_DOCS.md`
+          - Logs bundle: `history/_bundle/ALL_LOGS.md`
+          - Full text snapshot: `_bundle/ALL_TEXT_SNAPSHOT.md`
+          - Classes: `FieldOfHorrors/docs/design/classes/`
+          - Systems: `FieldOfHorrors/docs/design/systems/`
+          - Weapons/Skills: `FieldOfHorrors/docs/design/{weapons,skills}/`
+          - Arena cards: `FieldOfHorrors/docs/design/arena_cards/`
+          - Data: `FieldOfHorrors/data/`
+          MD
+
+      - name: Validate content
+        run: bash FieldOfHorrors/tools/validate_repo.sh
+
+      - name: Generate auto report
+        id: report
+        run: |
+          mkdir -p history/auto_reports
+          when="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          headref="$(git rev-parse --abbrev-ref HEAD)"
+          sha="$(git rev-parse --short HEAD)"
+          diffstat="$(git diff --name-status HEAD^ HEAD || true)"
+          cat > "history/auto_reports/${when}.md" <<EOF
+          # Auto Report — ${when}
+          - Branch: ${headref}
+          - Commit: ${sha}
+
+          ## Changed Files (HEAD^ → HEAD)
+          \`\`\`
+          ${diffstat}
+          \`\`\`
+          EOF
+
+      - name: Rebuild logs bundle to include auto report
+        run: bash FieldOfHorrors/tools/bundle_logs.sh
+
+      - name: Create/Update PR to main
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "Docs: refresh bundles & snapshot; add auto report"
+          title: "Docs: refresh bundles & snapshot (auto)"
+          body: |
+            Auto-generated:
+            - FieldOfHorrors/docs/_bundle/ALL_DOCS.md
+            - history/_bundle/ALL_LOGS.md
+            - _bundle/ALL_TEXT_SNAPSHOT.md
+            - CHATGPT_INDEX.md
+            - history/auto_reports/<timestamp>.md
+          branch: automation/chatgpt-bundles
+          base: main
+          delete-branch: true
+
+  # Optional: auto-merge the above PR when created by Actions bot
+  automerge:
+    needs: build-validate-and-pr
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: ahmadnassri/action-dependabot-auto-merge@v2
+        if: false
+      - name: Auto-merge via CLI (conditional)
+        run: |
+          echo "Enable repo auto-merge in settings for full hands-off merging."
