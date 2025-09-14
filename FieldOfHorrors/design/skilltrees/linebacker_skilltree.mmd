@@ -1,0 +1,31 @@
+
+flowchart TB
+  %% Linebacker – Tank/Disruptor
+  classDef early fill:#3c1c1c,stroke:#12100e,color:#eee,stroke-width:2px;
+  classDef mid fill:#5d3529,stroke:#12100e,color:#eee,stroke-width:2px;
+  classDef cap fill:#754c3f,stroke:#12100e,color:#eee,stroke-width:2px;
+  classDef debuff fill:#1c1214,stroke:#57cc11,color:#57cc11,stroke-dasharray: 5 3;
+
+  A[LINEBACKER START<br/>Signature: Charge/Shield]:::early
+
+  %% Early
+  E1[Shoulder Charge I<br/>Short dash knockback]:::early
+  E2[Shield Up I<br/>+Flat Damage Reduction]:::early
+  E3[Huddle I<br/>Aura: +Minor DR to allies/summons]:::early
+  D1{{Debuff: Heavy Pads<br/>-8% Move Speed, +Armor}}:::debuff
+
+  %% Mid
+  M1[Shoulder Charge II<br/>Leaves shockwave trail]:::mid
+  M2[Shield Bash<br/>Cone stun on bash]:::mid
+  M3[Taunting Call<br/>Brief taunt pulse on hit]:::mid
+  D2{{Debuff: Glass Visor<br/>-Vision radius, +Crit Resist}}:::debuff
+
+  %% Capstone
+  C1[Goal-Line Stand<br/>Temporal fortify, massive DR]:::cap
+  C2[Blitzkrieg<br/>Long dash through hordes, ragdoll toss]:::cap
+
+  A --> E1 --> M1 --> C2
+  A --> E2 --> M2 --> C1
+  A --> E3 --> M3 --> C1
+  E2 --> D1
+  M1 --> D2
