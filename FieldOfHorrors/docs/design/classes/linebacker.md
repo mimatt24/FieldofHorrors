@@ -1,0 +1,23 @@
+# Linebacker
+**Role:** Vanguard/Protector  
+**Movement:** SPD 5.7 • **HP:** 140 • **Grit Cap:** 45 • **Armor:** Heavy
+
+## Default Weapons
+- Primary: (see weapons/)
+- Secondary: (see weapons/ or gadget)
+
+## Signature
+- Goal Line Stand – team Grit regen aura, -10% dmg taken
+
+## Skills
+1. (Skill A) – …
+2. (Skill B) – …
+3. (Ultimate) – …
+
+## Perks (early picks)
+- Node A: …
+- Node B: …
+- Node C: …
+
+## Tips
+- …

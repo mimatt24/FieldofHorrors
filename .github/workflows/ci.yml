@@ -1,0 +1,23 @@
+name: docs-ci
+on:
+  push:
+    branches: [ main, feature/** ]
+  pull_request:
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DavidAnson/markdownlint-cli2-action@v13
+        with:
+          globs: "**/*.md"
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check links
+        uses: lycheeverse/lychee-action@v1.10.0
+        with:
+          args: --no-progress --accept 429,403 "**/*.md"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,8 @@
+[
+  {"id":"pitcher","spd":6.1,"hp":100,"grit":25,"armor":"Light"},
+  {"id":"batter","spd":5.8,"hp":125,"grit":35,"armor":"Medium"},
+  {"id":"qb","spd":6.0,"hp":100,"grit":20,"armor":"Light","summoner":true},
+  {"id":"linebacker","spd":5.7,"hp":140,"grit":45,"armor":"Heavy"},
+  {"id":"point_guard","spd":6.2,"hp":95,"grit":20,"armor":"Light"},
+  {"id":"power_forward","spd":5.9,"hp":120,"grit":30,"armor":"Medium"}
+]
