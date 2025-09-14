@@ -16,12 +16,13 @@ jobs:
         with: { fetch-depth: 0 }
 
       - name: Build design bundle
-        run: |
-          bash FieldOfHorrors/tools/bundle_docs.sh
+        run: bash FieldOfHorrors/tools/bundle_docs.sh
 
       - name: Build logs bundle
-        run: |
-          bash FieldOfHorrors/tools/bundle_logs.sh
+        run: bash FieldOfHorrors/tools/bundle_logs.sh || echo "No logs yet"
+
+      - name: Build full text snapshot
+        run: bash FieldOfHorrors/tools/bundle_everything.sh
 
       - name: Ensure CHATGPT_INDEX.md
         run: |
@@ -29,6 +30,7 @@ jobs:
           # Field Of Horrors — ChatGPT Discovery Index
           - Design bundle: `FieldOfHorrors/docs/_bundle/ALL_DOCS.md`
           - Logs bundle: `history/_bundle/ALL_LOGS.md`
+          - Full text snapshot: `_bundle/ALL_TEXT_SNAPSHOT.md`
           - Classes: `FieldOfHorrors/docs/design/classes/`
           - Systems: `FieldOfHorrors/docs/design/systems/`
           - Weapons/Skills: `FieldOfHorrors/docs/design/{weapons,skills}/`
@@ -39,12 +41,13 @@ jobs:
       - name: Create/Update PR to main
         uses: peter-evans/create-pull-request@v6
         with:
-          commit-message: "Docs: refresh ChatGPT bundles & index (auto)"
-          title: "Docs: refresh ChatGPT bundles & index (auto)"
+          commit-message: "Docs: refresh ChatGPT bundles & full text snapshot (auto)"
+          title: "Docs: refresh ChatGPT bundles & full text snapshot (auto)"
           body: |
-            Auto-generated:
+            Auto-generated artifacts:
             - FieldOfHorrors/docs/_bundle/ALL_DOCS.md
             - history/_bundle/ALL_LOGS.md
+            - _bundle/ALL_TEXT_SNAPSHOT.md
             - CHATGPT_INDEX.md (root)
           branch: automation/chatgpt-bundles
           base: main

@@ -12,3 +12,6 @@
 - See `CHATGPT_INDEX.md` (root).
 - Design bundle: `FieldOfHorrors/docs/_bundle/ALL_DOCS.md`
 - Logs bundle: `history/_bundle/ALL_LOGS.md`
+
+### ChatGPT Text Snapshot
+- See `_bundle/ALL_TEXT_SNAPSHOT.md` for an aggregated view of repo text.

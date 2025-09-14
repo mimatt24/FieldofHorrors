@@ -11,3 +11,6 @@ Shortcuts:
 - Weapons/Skills: `FieldOfHorrors/docs/design/{weapons,skills}/`
 - Arena cards: `FieldOfHorrors/docs/design/arena_cards/`
 - Data stubs: `FieldOfHorrors/data/`
+
+## Full Repo (text) Snapshot
+- `_bundle/ALL_TEXT_SNAPSHOT.md` — aggregated view of most text files (auto-built)
