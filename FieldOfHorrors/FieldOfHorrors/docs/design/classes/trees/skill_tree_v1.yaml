@@ -1,0 +1,210 @@
+version: 1
+notes: |
+  PoE2-lean shared core with subclass divergence.
+  Targets: 5–10m runs; mid-run trash TTK ~0.8–1.2s; elites 3–5x HP; bosses 30–50x HP.
+  First capstone at ~6–7 minutes with elite-kill accelerants.
+  Debuff Crystals use weighted selection with guardrails (see debuff_crystals.yaml).
+share_ratio: 0.28   # ~28% shared core
+capstone_pacing_minutes: [6, 7]
+
+core:
+  groups:
+    - id: offense_core
+      label: "Offense Core"
+      nodes:
+        - id: oc_dmg_1
+          name: "Fundamentals I"
+          effects: [{ stat: "Damage_%", value: 8 }]
+        - id: oc_as_1
+          name: "Tempo I"
+          effects: [{ stat: "AttackSpeed_%", value: 6 }]
+        - id: oc_crit_1
+          name: "Precision I"
+          effects: [{ stat: "CritChance_%", value: 5 }, { stat: "CritDamage_%", value: 10 }]
+    - id: defense_core
+      label: "Defense Core"
+      nodes:
+        - id: dc_hp_1
+          name: "Conditioning I"
+          effects: [{ stat: "MaxHP_%", value: 10 }]
+        - id: dc_dr_1
+          name: "Pad Work I"
+          effects: [{ stat: "DR_%", value: 6 }]
+    - id: mobility_core
+      label: "Mobility & Stamina"
+      nodes:
+        - id: mc_dash_iframes
+          name: "Footwork"
+          effects: [{ stat: "Dash_IFrames_ms", value: 60 }]
+        - id: mc_stamina
+          name: "Breath Control"
+          effects: [{ stat: "Stamina_Regen_%", value: 15 }, { stat: "Stamina_Max_%", value: 10 }]
+    - id: status_basics
+      label: "Status Basics"
+      nodes:
+        - id: sb_bleed
+          name: "Cut Through"
+          effects: [{ stat: "Bleed_Chance_%", value: 8 }, { stat: "Bleed_Duration_%", value: 10 }]
+        - id: sb_stun
+          name: "Stagger Science"
+          effects: [{ stat: "Stun_Power_%", value: 10 }]
+    - id: hazard_literacy
+      label: "Hazard Literacy"
+      nodes:
+        - id: hl_telegraph_read
+          name: "Read the Field"
+          effects: [{ stat: "Telegraph_Clarity_%", value: 15 }]
+        - id: hl_hazard_cc
+          name: "Ice in Veins"
+          effects: [{ stat: "Hazard_CC_Duration_%", value: -15 }]
+
+classes:
+  Pitcher:
+    weapon_tags: ["fastball","curveball"]
+    keystones:
+      - id: p_ks_curve_control
+        name: "Curve Control"
+        effects: [{ stat: "Curveball_Slow_%", value: 20 }, { stat: "Curveball_Confuse_Chance_%", value: 10 }]
+      - id: p_ks_fastball_pierce
+        name: "Ace Pitch"
+        effects: [{ stat: "Fastball_Pierce", value: 1 }, { stat: "CritChance_%", value: 4 }]
+    branches:
+      - id: p_long_range
+        label: "Long Range"
+        nodes:
+          - { id: p_lr_1, name: "Grip Strength", effects: [{ stat: "ProjectileSpeed_%", value: 12 }] }
+          - { id: p_lr_2, name: "Spot Hitter", effects: [{ stat: "Headshot_Damage_%", value: 20 }] }
+      - id: p_control
+        label: "Control"
+        nodes:
+          - { id: p_ct_1, name: "Changeup", effects: [{ stat: "Enemy_Slow_%", value: 12 }] }
+          - { id: p_ct_2, name: "Paint the Corners", effects: [{ stat: "Confuse_Chance_%", value: 6 }] }
+    capstone:
+      id: p_cap_grand_slam
+      name: "Grand Slam Pitch"
+      gate: { minute: 6, requires: ["p_ks_fastball_pierce","p_lr_2"] }
+      effects:
+        - { stat: "Cast_Spread_Projectiles", value: 5 }
+        - { stat: "Projectile_Fire_DoT", value: 120 }   # tuned vs mid-run elite HP
+
+  Batter:
+    weapon_tags: ["bat","batblade"]
+    keystones:
+      - { id: b_ks_timing, name: "On the Sweet Spot", effects: [{ stat: "Timed_Crit_Bonus_%", value: 50 }] }
+      - { id: b_ks_knockback, name: "Home Crowd", effects: [{ stat: "Knockback_%", value: 20 }] }
+    branches:
+      - id: b_combo
+        label: "Combo Engine"
+        nodes:
+          - { id: b_ce_1, name: "Three Count", effects: [{ stat: "Combo_Build_Rate_%", value: 20 }] }
+          - { id: b_ce_2, name: "Finish Him", effects: [{ stat: "Finisher_Damage_%", value: 25 }] }
+      - id: b_bleed
+        label: "Bleed"
+        nodes:
+          - { id: b_bl_1, name: "Razor Tape", effects: [{ stat: "Bleed_Chance_%", value: 12 }] }
+          - { id: b_bl_2, name: "Open Wound", effects: [{ stat: "Bleed_DPS_%", value: 20 }] }
+    capstone:
+      id: b_cap_blood_diamond
+      name: "Blood Diamond Bat"
+      gate: { minute: 6, requires: ["b_ks_timing","b_ce_2"] }
+      effects:
+        - { stat: "Guaranteed_Crit_on_Finisher", value: 1 }
+        - { stat: "Bleed_On_Crit", value: 1 }
+
+  Linebacker:
+    weapon_tags: ["bash","shield"]
+    keystones:
+      - { id: l_ks_iron_wall, name: "Iron Wall", effects: [{ stat: "DR_%", value: 12 }] }
+      - { id: l_ks_taunt, name: "Taunting Roar", effects: [{ stat: "Taunt_Radius_%", value: 20 }] }
+    branches:
+      - id: l_control
+        label: "Control"
+        nodes:
+          - { id: l_ct_1, name: "Stun Lock", effects: [{ stat: "Stun_Duration_%", value: 12 }] }
+          - { id: l_ct_2, name: "Shoulder Check", effects: [{ stat: "Bash_Damage_%", value: 18 }] }
+      - id: l_hazard_soak
+        label: "Hazard Soak"
+        nodes:
+          - { id: l_hs_1, name: "Grounded", effects: [{ stat: "Knockback_Taken_%", value: -20 }] }
+          - { id: l_hs_2, name: "Shock Absorbers", effects: [{ stat: "Hazard_Damage_Taken_%", value: -15 }] }
+    capstone:
+      id: l_cap_blitzkrieg
+      name: "Blitzkrieg"
+      gate: { minute: 6, requires: ["l_ks_iron_wall","l_ct_2"] }
+      effects:
+        - { stat: "Unstoppable_Dash", value: 1 }
+        - { stat: "Dash_Damage_AOE", value: 220 }
+
+  Quarterback:
+    weapon_tags: ["command","pass"]
+    keystones:
+      - { id: q_ks_oline, name: "Offensive Line", effects: [{ stat: "Summon_Linemen", value: 2 }] }
+      - { id: q_ks_playbook, name: "Two-Minute Playbook", effects: [{ stat: "Team_Haste_%", value: 8 }] }
+    branches:
+      - id: q_summons
+        label: "Summons"
+        nodes:
+          - { id: q_sm_1, name: "Anchor Block", effects: [{ stat: "Summon_HP_%", value: 20 }] }
+          - { id: q_sm_2, name: "Route Tree", effects: [{ stat: "Summon_Damage_%", value: 15 }] }
+      - id: q_pass
+        label: "Passing Game"
+        nodes:
+          - { id: q_pg_1, name: "Precision Pass", effects: [{ stat: "Pass_AOE_Radius_%", value: 15 }] }
+          - { id: q_pg_2, name: "Handoff", effects: [{ stat: "OnPass_Explode", value: 1 }] }
+    capstone:
+      id: q_cap_hail_mary
+      name: "Hail Mary"
+      gate: { minute: 6, requires: ["q_sm_2","q_pg_2"] }
+      effects:
+        - { stat: "Summon_Receivers", value: 5 }
+        - { stat: "Summon_Linemen", value: 2 }
+        - { stat: "Duration_s", value: 12 }
+
+  PointGuard:
+    weapon_tags: ["dash","support"]
+    keystones:
+      - { id: pg_ks_no_look, name: "No-Look Pass", effects: [{ stat: "Ally_AS_%", value: 10 }] }
+      - { id: pg_ks_crossover, name: "Cross-Over", effects: [{ stat: "Dash_Charges", value: 1 }] }
+    branches:
+      - id: pg_speed
+        label: "Speed Game"
+        nodes:
+          - { id: pg_sp_1, name: "Ankles", effects: [{ stat: "MoveSpeed_%", value: 10 }] }
+          - { id: pg_sp_2, name: "Breakaway", effects: [{ stat: "Dash_CD_%", value: -12 }] }
+      - id: pg_control
+        label: "Court Control"
+        nodes:
+          - { id: pg_cc_1, name: "Pick-and-Roll", effects: [{ stat: "Stun_On_Dash_ms", value: 300 }] }
+          - { id: pg_cc_2, name: "Floor General", effects: [{ stat: "Team_Haste_%", value: 6 }] }
+    capstone:
+      id: pg_cap_full_court
+      name: "Full Court Press"
+      gate: { minute: 6, requires: ["pg_cc_2","pg_ks_crossover"] }
+      effects:
+        - { stat: "Global_Slow_%", value: 20 }
+        - { stat: "Team_Haste_%", value: 10 }
+        - { stat: "Duration_s", value: 10 }
+
+  Center:
+    weapon_tags: ["slam","grapple"]
+    keystones:
+      - { id: c_ks_box_out, name: "Box Out", effects: [{ stat: "Knockback_Aura", value: 1 }, { stat: "Aura_Strength_%", value: 20 }] }
+      - { id: c_ks_rebounder, name: "Rebounder", effects: [{ stat: "Pickup_Magnet_Radius_%", value: 25 }] }
+    branches:
+      - id: c_zone
+        label: "Paint Control"
+        nodes:
+          - { id: c_zn_1, name: "Paint Dominance", effects: [{ stat: "DR_While_Stationary_%", value: 12 }] }
+          - { id: c_zn_2, name: "Hard Screen", effects: [{ stat: "Reflect_Chance_%", value: 12 }] }
+      - id: c_slam
+        label: "Slam"
+        nodes:
+          - { id: c_sl_1, name: "Alley-Oop", effects: [{ stat: "Pull_On_Slam", value: 1 }] }
+          - { id: c_sl_2, name: "Who’s In The Paint?", effects: [{ stat: "AOE_Damage_%", value: 18 }] }
+    capstone:
+      id: c_cap_slam_damned
+      name: "Slam of the Damned"
+      gate: { minute: 6, requires: ["c_sl_2","c_ks_box_out"] }
+      effects:
+        - { stat: "Massive_AOE_Impact", value: 1 }
+        - { stat: "Elite_Shatter_Threshold_%", value: 20 }  # target mid-run elite kill threshold
