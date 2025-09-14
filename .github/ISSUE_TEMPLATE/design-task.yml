@@ -1,0 +1,11 @@
+name: Design Task
+description: Plan/track a design deliverable
+labels: ["design"]
+body:
+  - type: input
+    id: deliverable
+    attributes: { label: Deliverable, placeholder: "Arena card, weapon spec, UX wire..." }
+    validations: { required: true }
+  - type: textarea
+    id: scope
+    attributes: { label: Scope, placeholder: "What, why, acceptance criteria" }

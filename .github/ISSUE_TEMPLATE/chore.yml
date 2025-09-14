@@ -1,0 +1,7 @@
+name: Chore
+description: Repo hygiene / tooling
+labels: ["chore"]
+body:
+  - type: textarea
+    id: work
+    attributes: { label: Work, placeholder: "What needs cleanup?" }
