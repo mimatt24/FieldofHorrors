@@ -10,9 +10,13 @@ on:
 jobs:
   generate-mermaid-pngs:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # allow pushing with GITHUB_TOKEN
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # required for committing/pushing
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -37,3 +41,21 @@ jobs:
         with:
           name: mermaid-diagrams
           path: art/autogen/*.png
+
+      - name: Commit generated images back to repo
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Only add autogen PNGs to avoid polluting history
+          git add art/autogen/*.png
+
+          # If there are no changes, exit quietly
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "chore(autogen): update Mermaid diagrams [skip ci]"
+          git push
