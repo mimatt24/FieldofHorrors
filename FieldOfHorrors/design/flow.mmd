@@ -1,20 +1,40 @@
 flowchart TD
-  A[Run Start] --> B{Mode?}
-  B -->|Standard| C[Stages & Boss Gates]
-  B -->|Daily/Weekly| D[Challenge Modifiers]
-  C --> E[End Boss: Referee King]
-  E --> F{Win?}
-  F -->|Yes| G[National Championship Unlocked]
-  F -->|No| A
-  G --> H{Prestige?}
-  H -->|Prestige| I[Reset run-level, gain Hall of Fame Points]
-  H -->|Continue| J[Keep pushing base game]
-  I --> K[ScoreBoard Submit]
-  J --> K
-  K --> L{Season rollover (6 mo)?}
-  L -->|Yes| M[New League: lvl 1, keep cosmetics; seasonal ladder]
-  L -->|No| N[Climb Leaderboards]
-  M --> O[Seasonal rewards (jerseys, banners, skins)]
-  N --> P{Ascended?}
-  P -->|Yes| Q[Multi-Talented (locked fusion pairs)]
-  P -->|No| A
+  %% Field of Horrors – High-level Flow
+
+  %% Optional: simple styling (kept compatible with GitHub renderer)
+  classDef phase fill:#3c1c1c,stroke:#12100e,color:#eee,stroke-width:2px;
+  classDef op fill:#5d3529,stroke:#12100e,color:#eee,stroke-width:2px;
+  classDef decision fill:#754c3f,stroke:#12100e,color:#eee,stroke-width:2px;
+
+  A["Main Menu"]:::phase
+  B["Select Class / Subclass"]:::op
+  C["Choose Mode (Survival / Arena)"]:::op
+  D["Run Starts (5–10 min target)"]:::phase
+  E["Hordes + Hazards + Elites"]:::op
+  F{"Boss gate reached?"}:::decision
+  G["Boss Fight"]:::phase
+  H{"Victory?"}:::decision
+  I["Rewards & Crafting (Deterministic Trees)"]:::op
+  J["Base Upgrades (Rooms/Crafting/Training)"]:::op
+  K{"Ascension Unlocked?"}:::decision
+  L{"Season rollover (6 mo)?"}:::decision
+  M["Start New Season (optional)"]:::phase
+  N["Continue Current Season"]:::phase
+  O["Leaderboard Submit (Daily/Weekly/Class)"]:::op
+  P["Back to Menu"]:::phase
+
+  %% Flow
+  A --> B --> C --> D --> E --> F
+  F -->|Yes| G --> H
+  F -->|No| I
+  H -->|Win| I
+  H -->|Lose| I
+
+  I --> J --> K
+  K -->|Yes (Prestige)| O
+  K -->|No| O
+
+  O --> L
+  L -->|Yes| M --> P
+  L -->|No| N --> P
+
