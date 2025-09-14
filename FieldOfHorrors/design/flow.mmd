@@ -1,40 +1,45 @@
 flowchart TD
   %% Field of Horrors – High-level Flow
 
-  %% Optional: simple styling (kept compatible with GitHub renderer)
   classDef phase fill:#3c1c1c,stroke:#12100e,color:#eee,stroke-width:2px;
   classDef op fill:#5d3529,stroke:#12100e,color:#eee,stroke-width:2px;
   classDef decision fill:#754c3f,stroke:#12100e,color:#eee,stroke-width:2px;
 
   A["Main Menu"]:::phase
   B["Select Class / Subclass"]:::op
-  C["Choose Mode (Survival / Arena)"]:::op
-  D["Run Starts (5–10 min target)"]:::phase
-  E["Hordes + Hazards + Elites"]:::op
+  C["Choose Mode: Survival or Arena"]:::op
+  D["Run Starts: target 5–10 minutes"]:::phase
+  E["Hordes, Hazards, Elites"]:::op
   F{"Boss gate reached?"}:::decision
   G["Boss Fight"]:::phase
   H{"Victory?"}:::decision
-  I["Rewards & Crafting (Deterministic Trees)"]:::op
-  J["Base Upgrades (Rooms/Crafting/Training)"]:::op
-  K{"Ascension Unlocked?"}:::decision
-  L{"Season rollover (6 mo)?"}:::decision
-  M["Start New Season (optional)"]:::phase
+  I["Rewards & Crafting: deterministic trees"]:::op
+  J["Base Upgrades: rooms, crafting, training"]:::op
+  K{"Ascension unlocked?"}:::decision
+  L{"Season rollover in 6 months?"}:::decision
+  M["Start New Season"]:::phase
   N["Continue Current Season"]:::phase
-  O["Leaderboard Submit (Daily/Weekly/Class)"]:::op
+  O["Leaderboard Submit: daily, weekly, class"]:::op
   P["Back to Menu"]:::phase
 
-  %% Flow
-  A --> B --> C --> D --> E --> F
-  F -->|Yes| G --> H
+  %% Flow (one statement per line)
+  A --> B
+  B --> C
+  C --> D
+  D --> E
+  E --> F
+  F -->|Yes| G
   F -->|No| I
+  G --> H
   H -->|Win| I
   H -->|Lose| I
-
-  I --> J --> K
-  K -->|Yes (Prestige)| O
+  I --> J
+  J --> K
+  K -->|Yes, prestige| O
   K -->|No| O
-
   O --> L
-  L -->|Yes| M --> P
-  L -->|No| N --> P
+  L -->|Yes| M
+  L -->|No| N
+  M --> P
+  N --> P
 
