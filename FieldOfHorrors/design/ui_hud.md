@@ -46,3 +46,4 @@
 - UI is **data-driven**: JSON or resources for bars, icons, and strings.
 - Localize all text from day one (keys in `docs/i18n.md` later).
 
+- CI PDF test Sun Sep 14 03:18:54 UTC 2025
