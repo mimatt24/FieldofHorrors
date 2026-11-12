@@ -1,10 +1,12 @@
 # Enemy Elite Modifiers – Field of Horrors
 
 ## Goals
+
 - Turn any regular variation into a memorable **elite** with 1–2 visible rule twists.
 - Stay readable: big silhouettes, clear telegraphs, palette-locked + 1 wild card.
 
 ## Core Modifiers (MVP)
+
 1) **Overtime**
    - Effect: +20% move/attack speed; on-kill haste burst (2s).
    - Visual: glow trail on feet; faint stopwatch icon.
@@ -46,20 +48,23 @@
    - Counter: commit or disengage—don’t half-measure.
 
 ## Stacking Rules
+
 - Max **2 modifiers** per elite (avoid unreadable combos).
 - If two chosen, pair **one mobility** with **one utility/damage** (e.g., Overtime + Explosive).
 
 ## Tuning Bands (start points)
+
 - Overtime: +20% speed; haste burst = +30% for 2s.
 - Thick Skin: +40% HP; stagger resistance 50%.
 - Explosive: 1.0s telegraph; 250 base AOE damage (midgame).
 - Conductor: jumps up to 3 targets; 0.8s interval; reduced in big crowds.
 
 ## Drops
+
 - Slightly higher drop chance for **Craft Parts** and **Merch Tokens**.
 - Unique shards for late-tier recipes have a small chance on double-mod elites.
 
 ## QA Notes
+
 - Every modifier must be visible **before** it matters (1s+ tell).
 - Elites should be **threat puzzles** not just HP sponges.
-

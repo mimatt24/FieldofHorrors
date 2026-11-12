@@ -1,6 +1,7 @@
 # Telegraph Tables – Schema
 
 **Columns (required):**
+
 | move | startup | active | recovery | cooldown | range | tells | damage | stagger | counterplay | variations | notes |
 |------|---------|--------|----------|----------|-------|-------|--------|---------|-------------|------------|-------|
 

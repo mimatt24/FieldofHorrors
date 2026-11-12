@@ -1,4 +1,5 @@
 # Telemetry Events (v0.1)
+
 **Status:** draft | **Owner:** design/analytics | **Last-updated:** 2025-09-14
 
 - `death_event`: {player_id, cause, arena, timestamp}

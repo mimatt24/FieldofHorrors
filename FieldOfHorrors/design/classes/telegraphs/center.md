@@ -12,10 +12,11 @@
 | Hard Screen       | 0.40          | 6.0        | 16.0         | reflective “shield” sheen; small ticks on reflect |
 
 **Readability**
+
 - Keep **slam** telegraphs ≥ 0.7s so players can react.
 - Use **circle rings** and **shadow decals** to indicate where enemies will land.
 
 **Tuning Targets**
+
 - Box Out knockback tick ~120 units per second.
 - Slam of the Damned base damage tuned around **AOE elite-kill threshold** for mid-run.
-

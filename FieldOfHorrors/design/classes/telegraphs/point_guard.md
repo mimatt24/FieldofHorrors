@@ -12,5 +12,3 @@
 | Fast Break          | 0.25          | 6.0        | 20.0         | on elite kill: sound cue + UI haste banner |
 
 **Readability**
-
-

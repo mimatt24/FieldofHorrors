@@ -1,6 +1,7 @@
 # Arena Challenge – Stadium T1: Rookie Warm-Up
 
 **Metadata**
+
 - Name: Stadium T1 – Rookie Warm-Up
 - Tier: 1
 - Biome: stadium
@@ -8,21 +9,25 @@
 - Rewards: 100 ⚾ Scrip, 1x Common Mod
 
 **Objective**
+
 - Primary: Clear all waves within **3:00**.
 - Secondary (optional): Take **≤1** hit(s).
 - Fail: Timer expires or team wipe.
 
 **Modifiers**
+
 - Global: Crowd Noise (minor telegraph audio dampening).
 - Enemy: None (training match).
 - Player: +10% stamina regen between waves.
 
 **Wave Plan (summary)**
+
 - Wave 1 (0:00): 2x Pitcher (fastball/curveball basics)
 - Wave 2 (0:45): 1x Pitcher, 1x Batter (introduces melee spacing)
 - Wave 3 (1:30): 2x Batter (power swing spacing test)
 
 **Enemy Telegraph References**
+
 - Pitcher: [../telegraphs/pitcher.md](../telegraphs/pitcher.md)
 - Batter:  [../telegraphs/batter.md](../telegraphs/batter.md)
 

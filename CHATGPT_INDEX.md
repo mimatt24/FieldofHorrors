@@ -6,6 +6,7 @@
 - **Logs bundle (all sessions):** `history/_bundle/ALL_LOGS.md`
 
 Shortcuts:
+
 - Classes: `FieldOfHorrors/docs/design/classes/`
 - Systems: `FieldOfHorrors/docs/design/systems/`
 - Weapons/Skills: `FieldOfHorrors/docs/design/{weapons,skills}/`
@@ -13,4 +14,5 @@ Shortcuts:
 - Data stubs: `FieldOfHorrors/data/`
 
 ## Full Repo (text) Snapshot
+
 - `_bundle/ALL_TEXT_SNAPSHOT.md` — aggregated view of most text files (auto-built)

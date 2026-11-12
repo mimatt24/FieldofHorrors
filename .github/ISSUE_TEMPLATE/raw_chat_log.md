@@ -7,17 +7,23 @@ assignees: ''
 ---
 
 ## Context / Goal
+
 (Brief description)
 
 ## Log (verbatim)
+
 ### USER
+
 (paste)
 
 ### ASSISTANT
+
 (paste)
 
 ### USER
+
 (paste)
 
 ### ASSISTANT
+
 (paste)

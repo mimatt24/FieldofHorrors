@@ -16,7 +16,7 @@
 | T-Shirt Cannon      | AOE shell      | 40       | 0.8   | 32  | arc + clutter zones |
 
 **Tuning Guide**
+
 - Melee > Ranged DPS baseline (risk premium).
 - Ranged gains safety via pierce/utility.
 - Capstones feel ~20–30% above tier-3 DPS but are gated by mechanics/cooldowns.
-
