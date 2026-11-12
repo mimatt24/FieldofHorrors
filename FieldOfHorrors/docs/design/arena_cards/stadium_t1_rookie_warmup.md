@@ -47,6 +47,7 @@ flowchart TD
 ```
 
 ## Player Loadouts (Baseline Weapons)
+
 - Pitcher: [Whistle Bomb](../weapons/whistle_bomb.md)
 - Batter:  [Foam-Finger Pike](../weapons/foam_finger_pike.md)
 - Linebacker: [Shoulder Ram](../weapons/shoulder_ram.md)
