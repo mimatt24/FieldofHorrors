@@ -44,8 +44,7 @@ flowchart TD
   Start -. "Timer 3:00" .-> T[Timer]
   T -->|0:00| Fail([Fail])
   Start -. "Team wipe" .-> Fail
-
-
+```
 
 ## Player Loadouts (Baseline Weapons)
 - Pitcher: [Whistle Bomb](../weapons/whistle_bomb.md)

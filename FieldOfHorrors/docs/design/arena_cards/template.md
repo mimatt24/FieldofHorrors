@@ -38,4 +38,4 @@ flowchart TD
   Boss -->|No| Success([Success])
   Boss -->|Yes| WB[Boss Wave] --> Success
   Start -. Fail condition .-> Fail([Fail])
-
+```
