@@ -1,3 +1,19 @@
-# Foam-Finger Pike
-Type: Melee (Pierce) • Reach: Long • Multi-hit line
-Synergy: Batter burst lanes; Power Forward zones
+# foam finger pike
+**Status:** draft  
+**Owner:** design  
+**Last-updated:** 2025-09-14
+
+## Role
+(one line)
+
+## Stats (v0.2 target)
+- Damage:
+- Range:
+- Stagger:
+- TtK vs trash:
+
+## Counterplay
+(what beats this, how to read the tell)
+
+## Unlock Path
+(when/how)

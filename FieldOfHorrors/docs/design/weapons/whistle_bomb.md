@@ -1,3 +1,19 @@
-# Whistle Bomb
-Type: Thrown Explosive • Radius: Small • Stagger: High • Fuse: 1.2s
-Synergy: Pitcher (Mark setups), Batter (ignite Pine Tar lanes)
+# whistle bomb
+**Status:** draft  
+**Owner:** design  
+**Last-updated:** 2025-09-14
+
+## Role
+(one line)
+
+## Stats (v0.2 target)
+- Damage:
+- Range:
+- Stagger:
+- TtK vs trash:
+
+## Counterplay
+(what beats this, how to read the tell)
+
+## Unlock Path
+(when/how)
