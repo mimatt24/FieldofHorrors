@@ -1,4 +1,5 @@
 # Contributing
+
 - Branch names: `type/area-short` (e.g., `design/arena-stadium-t1`, `chore/devops-bootstrap`).
 - Commits: Conventional Commits (`feat:`, `fix:`, `docs:`, `chore:`, etc.).
 - PRs: must include **type:** and **area:** labels; auto-labeled by paths.

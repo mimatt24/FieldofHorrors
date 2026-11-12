@@ -1,9 +1,11 @@
 # Enemy Variations – *Field of Horrors*
 
 ## Overview
+
 The **Zombie Fan** is the baseline enemy archetype: mindless, sports-obsessed undead that roam every stage. Variations build on this core by introducing **mechanical differences** and **visual humor** while maintaining the horror-comedy sports theme. Each variation uses the **locked 10-color palette** with **one “wild card” highlight color** to keep silhouettes distinct.
 
 Enemy philosophy:
+
 - Every variation must play differently (not just cosmetic).
 - Gore + comedy blend: silly violence in grotesque sports settings.
 - Wild card colors emphasize iconic props (foam fingers, pom-poms, flags, etc.).
@@ -26,6 +28,7 @@ Enemy philosophy:
 ---
 
 ## Elite & Boss Notes
+
 - **Elites:** Glowing jerseys, faster animations, extra gore VFX.
 - **Potential Bosses:**  
   - *Referee King* (giant ref zombie with multiple stun-flag mechanics).  
@@ -34,5 +37,6 @@ Enemy philosophy:
 ---
 
 ## Future Expansion
+
 - Add seasonal enemies (e.g., holiday-themed zombies, sports playoff variants).  
 - Integrate “Multi-Talented” fusion zombies (soccer hooligan, tennis racket thrower) post-ascension.

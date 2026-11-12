@@ -1,4 +1,5 @@
 # Combat Overview
+
 - TTK target: quick on-ramp → avg 1.5–2.0s at higher difficulty
 - Resources: Stamina (move), Focus (skills), Grit (temp soak)
 - Armor: Light/Medium/Heavy; Damage: Kinetic/Explosive/Utility

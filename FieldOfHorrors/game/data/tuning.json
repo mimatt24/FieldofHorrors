@@ -1,0 +1,117 @@
+{
+  "_about": "All numbers for the Pitcher vertical slice. 'source' notes say which design doc a value comes from. Anything listed under _provisional was not in the design docs and is a starting guess.",
+  "_provisional": [
+    "world/units_per_spd", "world/arena_*", "player/grit_regen_*", "player/stamina_*", "player/dash_*", "player/knockback_decay", "fastball/speed", "fastball/range", "curveball/speed", "curveball/range", "curveball/arc", "curveball/slow_*", "whistle_bomb/damage", "whistle_bomb/radius", "whistle_bomb/cooldown", "whistle_bomb/throw_range", "whistle_bomb/flight_time", "whistle_bomb/stagger", "capstone/cooldown", "capstone/spread_deg", "capstone/burn_*", "zombie_fan/speed_spd", "zombie_fan/contact_damage", "zombie_fan/attack_*", "zombie_fan/elite_speed_mult", "spawns/phases", "run/boss_time", "referee_king/move_speed", "referee_king/flag_damage", "referee_king/flag_radius", "referee_king/shockwave_damage", "referee_king/shockwave_radius", "referee_king/contact_damage", "score/*"
+  ],
+  "world": {
+    "units_per_spd": 50,
+    "arena_width": 2400,
+    "arena_height": 1400
+  },
+  "player": {
+    "_source": "data/classes/classes.json (pitcher)",
+    "spd": 6.1,
+    "hp": 100,
+    "grit": 25,
+    "grit_regen_delay": 3.0,
+    "grit_regen_rate": 5.0,
+    "stamina": 100,
+    "stamina_regen": 22,
+    "dash_cost": 35,
+    "dash_speed": 900,
+    "dash_time": 0.16,
+    "dash_iframes": 0.2,
+    "knockback_decay": 2600
+  },
+  "fastball": {
+    "_source": "design/weapon_balance.md: 18 dmg, 3.0/s, pierce 1",
+    "damage": 18,
+    "rate": 3.0,
+    "pierce": 1,
+    "speed": 1100,
+    "range": 1000
+  },
+  "curveball": {
+    "_source": "design/weapon_balance.md: 14 dmg, 2.6/s, slow chance",
+    "damage": 14,
+    "rate": 2.6,
+    "speed": 750,
+    "range": 700,
+    "arc": 110,
+    "slow_factor": 0.6,
+    "slow_time": 2.0
+  },
+  "whistle_bomb": {
+    "_source": "classes/_archive_v1/pitcher.md: arc throw, 3s fuse, cookable. Damage borrowed from T-Shirt Cannon (40).",
+    "fuse": 3.0,
+    "damage": 40,
+    "radius": 130,
+    "cooldown": 6.0,
+    "throw_range": 480,
+    "flight_time": 0.45,
+    "stagger": 0.35
+  },
+  "capstone": {
+    "_source": "classes/detail/pitcher.md: Grand Slam Pitch, 5 flaming fastballs, unlocks at about 6-7 min",
+    "unlock_time": 360,
+    "balls": 5,
+    "spread_deg": 40,
+    "cooldown": 20,
+    "burn_dps": 8,
+    "burn_time": 3.0
+  },
+  "zombie_fan": {
+    "_source": "design/combat_stats.md: trash TTK 0.8-1.2s at Fastball 54 DPS gives 54 HP; elites 3-5x",
+    "hp": 54,
+    "speed_spd": 2.6,
+    "radius": 16,
+    "contact_damage": 10,
+    "attack_windup": 0.35,
+    "attack_cooldown": 0.9,
+    "attack_reach": 14,
+    "elite_hp_mult": 4,
+    "elite_speed_mult": 1.15
+  },
+  "spawns": {
+    "_source": "design/enemy_spawn_curves.md Curve A, compressed to one enemy type. Elite about every 90s.",
+    "elite_interval": 90,
+    "phases": [
+      {"until": 120, "interval": 2.0, "cap": 12},
+      {"until": 240, "interval": 1.3, "cap": 22},
+      {"until": 360, "interval": 0.9, "cap": 34}
+    ]
+  },
+  "run": {
+    "_source": "design/modes.md: 5-10 min runs with a boss gate",
+    "boss_time": 360
+  },
+  "referee_king": {
+    "_source": "design/bosses/referee_king.md and referee_king_telegraphs.md (Phase 1 only)",
+    "hp_x_trash": 40,
+    "radius": 42,
+    "move_speed": 95,
+    "contact_damage": 10,
+    "flag_telegraph": 0.6,
+    "flag_cooldown_min": 6,
+    "flag_cooldown_max": 8,
+    "flag_root": 0.85,
+    "flag_damage": 12,
+    "flag_radius": 75,
+    "shockwave_telegraph": 0.75,
+    "shockwave_active": 0.3,
+    "shockwave_cooldown_min": 10,
+    "shockwave_cooldown_max": 12,
+    "shockwave_knockback": 900,
+    "shockwave_damage": 15,
+    "shockwave_radius": 280,
+    "enrage_below": 0.35,
+    "enrage_speed": 1.15
+  },
+  "score": {
+    "kill": 10,
+    "elite": 100,
+    "boss": 1000,
+    "per_second": 1,
+    "no_hit_bonus": 500
+  }
+}

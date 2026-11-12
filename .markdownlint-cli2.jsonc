@@ -1,0 +1,26 @@
+{
+  // Lint hand-written docs only. Generated bundles, verbatim chat logs, and
+  // archived drafts are skipped.
+  "ignores": [
+    "**/_bundle/**",
+    "FieldOfHorrors/chat_bundle/**",
+    "FieldOfHorrors/history/raw_logs/**",
+    "FieldOfHorrors/history/chat_archive.md",
+    "FieldOfHorrors/history/auto_reports/**",
+    "history/**",
+    "FieldOfHorrors/docs/design/classes/_archive_v1/**",
+    "FieldOfHorrors/docs/README.md",
+    "FieldOfHorrors/design/classes.md",
+    ".github/**",
+    "HEALTHCHECK.md"
+  ],
+  "config": {
+    "default": true,
+    "MD013": false, // line length: design docs use long table rows
+    "MD024": { "siblings_only": true },
+    "MD029": false, // numbered lists continue across section headings
+    "MD033": false, // inline HTML (<br/> in tables)
+    "MD036": false, // bold lines used as section labels
+    "MD060": false  // table column alignment
+  }
+}

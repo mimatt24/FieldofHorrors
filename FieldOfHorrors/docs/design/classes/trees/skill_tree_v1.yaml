@@ -1,0 +1,7 @@
+# PLACEHOLDER: the full v1 PoE2-lean tree was never saved to the repo.
+# Only the header values below survived. Rebuild from classes/detail/*.md.
+# Shared core ~28%; per-class branches; capstones at ~6–7 minutes.
+# TTK & HP bands align with combat spec and spawn curves.
+version: 1
+share_ratio: 0.28
+capstone_pacing_minutes: [6, 7]

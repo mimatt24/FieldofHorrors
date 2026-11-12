@@ -1,0 +1,40 @@
+name: Godot check
+on:
+  push:
+    paths:
+      - "FieldOfHorrors/game/**"
+      - ".github/workflows/godot-check.yml"
+  pull_request:
+    paths:
+      - "FieldOfHorrors/game/**"
+      - ".github/workflows/godot-check.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    env:
+      GODOT_VERSION: 4.3-stable
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download Godot
+        run: |
+          curl -fsSL -o godot.zip "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_linux.x86_64.zip"
+          unzip -q godot.zip
+          mv "Godot_v${GODOT_VERSION}_linux.x86_64" godot
+          chmod +x godot
+          ./godot --version
+      - name: Import project
+        run: ./godot --headless --path FieldOfHorrors/game --import 2>&1 | tee import.log
+      - name: Play the scripted run
+        run: |
+          set -o pipefail
+          timeout 300 ./godot --headless --path FieldOfHorrors/game -- --smoke-test 2>&1 | tee smoke.log
+      - name: Fail on script errors
+        run: |
+          if grep -nE "SCRIPT ERROR|Parse Error|ERROR:" import.log smoke.log; then
+            echo "Godot reported errors"
+            exit 1
+          fi
+          grep -q "SMOKE TEST PASSED" smoke.log
