@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Check links
-        uses: lycheeverse/lychee-action@v1.10.0
+        uses: lycheeverse/lychee-action@v2.9.0
         with:
           args: --no-progress --accept 429,403 "**/*.md"
         env:
