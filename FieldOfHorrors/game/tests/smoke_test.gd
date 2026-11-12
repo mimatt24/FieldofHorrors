@@ -9,18 +9,37 @@ const REAL_TIMEOUT_MSEC: int = 150000
 var game = null
 var started_msec: int = 0
 var finished: bool = false
+var pending_press: Array = []
+var pending_release: Array = []
 
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	# Run before every other node so a press made here counts as
+	# "just pressed" for the player in the same frame, like real input.
+	process_priority = -1000
 	started_msec = Time.get_ticks_msec()
 	Engine.time_scale = TIME_SCALE
 	_run.call_deferred()
 
 
 func _process(_delta: float) -> void:
+	for action in pending_press:
+		Input.action_press(action)
+	pending_press.clear()
+	for action in pending_release:
+		Input.action_release(action)
+	pending_release.clear()
 	if not finished and Time.get_ticks_msec() - started_msec > REAL_TIMEOUT_MSEC:
 		_fail("timed out")
+
+
+func _press(action: String) -> void:
+	pending_press.append(action)
+
+
+func _release(action: String) -> void:
+	pending_release.append(action)
 
 
 func _wait(seconds: float) -> void:
@@ -57,13 +76,13 @@ func _run() -> void:
 
 	# 2. Move and dash.
 	var start_position: Vector2 = game.player.position
-	Input.action_press("move_right")
+	_press("move_right")
 	await _wait(0.5)
-	Input.action_press("dash")
+	_press("dash")
 	await _wait(0.1)
-	Input.action_release("dash")
+	_release("dash")
 	await _wait(0.4)
-	Input.action_release("move_right")
+	_release("move_right")
 	if not _check(game.player.position.x > start_position.x + 50.0, "player did not move"):
 		return
 	print("smoke: movement ok")
@@ -78,7 +97,7 @@ func _run() -> void:
 		return
 	var target = enemies[0]
 	target.position = game.player.position + game.player.aim_dir * 220.0
-	Input.action_press("fire")
+	_press("fire")
 	waited = 0.0
 	while game.kills < 1 and waited < 8.0:
 		_keep_alive()
@@ -86,20 +105,20 @@ func _run() -> void:
 			target.position = game.player.position + game.player.aim_dir * 220.0
 		await _wait(0.1)
 		waited += 0.1
-	Input.action_release("fire")
+	_release("fire")
 	if not _check(game.kills >= 1, "fastballs did not kill an enemy"):
 		return
 	print("smoke: fastball kill ok")
 
 	# 4. Curveball, then a cooked Whistle Bomb.
-	Input.action_press("curveball")
+	_press("curveball")
 	await _wait(1.0)
-	Input.action_release("curveball")
-	Input.action_press("bomb")
+	_release("curveball")
+	_press("bomb")
 	await _wait(1.0)
 	if not _check(game.player.cooking, "bomb did not start cooking"):
 		return
-	Input.action_release("bomb")
+	_release("bomb")
 	await _wait(3.0)
 	if not _check(game.player.cd_bomb > 0.0, "bomb did not go on cooldown"):
 		return
@@ -118,9 +137,9 @@ func _run() -> void:
 	# 6. Capstone, then let the boss run its attacks for a while.
 	var boss_hp_before: float = game.boss.hp
 	game.boss.position = game.player.position + game.player.aim_dir * 250.0
-	Input.action_press("capstone")
+	_press("capstone")
 	await _wait(0.1)
-	Input.action_release("capstone")
+	_release("capstone")
 	await _wait(1.0)
 	if not _check(game.player.cd_capstone > 0.0, "capstone did not fire"):
 		return
