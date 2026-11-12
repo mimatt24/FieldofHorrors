@@ -81,17 +81,3 @@ jobs:
           branch: automation/chatgpt-bundles
           base: main
           delete-branch: true
-
-  # Optional: auto-merge the above PR when created by Actions bot
-  automerge:
-    needs: build-validate-and-pr
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-    steps:
-      - uses: ahmadnassri/action-dependabot-auto-merge@v2
-        if: false
-      - name: Auto-merge via CLI (conditional)
-        run: |
-          echo "Enable repo auto-merge in settings for full hands-off merging."
