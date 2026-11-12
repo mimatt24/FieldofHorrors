@@ -1,0 +1,47 @@
+version: 0.1
+movement:
+  baseline_spd: 6.0
+  deltas:
+    QB: 0.0
+    Pitcher: 0.0
+    Batter: 0.0
+    Linebacker: -0.5
+    Point Guard: +0.5
+    Power Forward: -0.5
+combat:
+  ttk:
+    early: "fast"
+    mid: "1.5-2.0s"
+  multipliers:
+    head: 1.5
+    body: 1.0
+    limb: 0.8
+armor:
+  per_point_reduction: 0.10
+classes:
+  QB:
+    role: "Summoner/Field General"
+    spd: 6.0
+    arm: 1
+    loadout: [Playbook Launcher, Sidearm, Audible, Pep Talk, Hail Mary]
+    summons: [Receiver, Lineman, Kicker]
+  Pitcher:
+    spd: 6.0
+    arm: 0
+    loadout: [Whistle Bomb, Corked Bat, Curveball, Rosin Grip, Seventh-Inning Stretch]
+  Batter:
+    spd: 6.0
+    arm: 1
+    loadout: [Foam-Finger Pike, SMG, Bunt(Parry), Pine Tar, Grand Slam]
+  Linebacker:
+    spd: 5.5
+    arm: 2
+    loadout: [Shoulder Ram, Shotgun, Blitz, Goal Line Stand, Pile-Up]
+  Point Guard:
+    spd: 6.5
+    arm: 0
+    loadout: [Assist Pistol, Carbine, Pick & Roll, No-Look Pass, Full-Court Press]
+  Power Forward:
+    spd: 5.5
+    arm: 2
+    loadout: [Board Crusher, DMR, Box Out, Second Chance, Putback]
