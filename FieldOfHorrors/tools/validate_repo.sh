@@ -11,7 +11,7 @@ if [ -f FieldOfHorrors/data/classes/classes.json ]; then
              has("spd") and (.spd|type=="number" and .>0 and .<20) and
              has("hp") and (.hp|type=="number" and .>0 and .<10000) and
              has("grit") and (.grit|type=="number" and .>=0 and .<1000) and
-             has("armor") and (.armor|inside(["Light","Medium","Heavy"])))
+             has("armor") and (.armor as $a | ["Light","Medium","Heavy"] | index($a) != null))
   ' FieldOfHorrors/data/classes/classes.json >/dev/null || fail "classes.json schema/range check failed"
 fi
 

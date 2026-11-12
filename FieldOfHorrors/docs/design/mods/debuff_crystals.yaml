@@ -1,0 +1,5 @@
+# PLACEHOLDER: the full debuff crystal table was never saved to the repo.
+# Intent: weighted selection with guardrails; reroll tokens; banned pairs for fairness.
+# Per-class crystals are listed on each class page under "Debuff Crystals".
+version: 0
+crystals: []
