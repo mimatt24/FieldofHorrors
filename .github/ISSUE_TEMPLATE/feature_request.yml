@@ -15,4 +15,4 @@ body:
     attributes: { label: Acceptance Criteria, placeholder: "- [ ] ..." }
   - type: input
     id: references
-    attributes: { label: References (chat_archive lines/URLs), placeholder: "docs/design/chat_archive.md#L123-L160" }
+    attributes: { label: References (chat_archive lines/URLs), placeholder: "FieldOfHorrors/history/chat_archive.md#L123-L160" }

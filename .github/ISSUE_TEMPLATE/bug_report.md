@@ -1,8 +1,13 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: Report something broken in the game, docs, or tooling
+labels: bug
 ---
+
 **Describe the bug**
+
 **Steps to reproduce**
+
 **Expected behavior**
+
 **Screens/Logs**
