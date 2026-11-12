@@ -1,47 +1,107 @@
-version: 0.1
+# Class data for the game. Stats mirror data/classes/classes.json (the validated source).
+# Kit follows the GDD: signature + skill lines + one capstone, no ultimates.
+# All numbers are starting values and are expected to change with playtests.
+version: 0.2
 movement:
   baseline_spd: 6.0
-  deltas:
-    QB: 0.0
-    Pitcher: 0.0
-    Batter: 0.0
-    Linebacker: -0.5
-    Point Guard: +0.5
-    Power Forward: -0.5
 combat:
   ttk:
-    early: "fast"
-    mid: "1.5-2.0s"
+    trash_mid_run: "0.8-1.2s"
+    higher_difficulty: "1.5-2.0s"
   multipliers:
-    head: 1.5
-    body: 1.0
-    limb: 0.8
-armor:
-  per_point_reduction: 0.10
+    headshot: 1.75
+    weak_point: 1.5
+    thrown: 1.25
+  elite_hp_x_trash: [3, 5]
+  boss_hp_x_trash: [30, 50]
+armor_classes: [Light, Medium, Heavy]
 classes:
-  QB:
-    role: "Summoner/Field General"
+  pitcher:
+    name: Pitcher
+    sport: baseball
+    role: "Ranged precision/control"
+    spd: 6.1
+    hp: 100
+    grit: 25
+    armor: Light
+    primary: Baseballs
+    secondary: Whistle Bomb
+    signature: Curveball
+    skills: [Fastball, Curveball, Rosin Bag, Change-Up]
+    capstone: Grand Slam Pitch
+  batter:
+    name: Batter
+    sport: baseball
+    role: "Melee crit/knockback"
+    spd: 5.8
+    hp: 125
+    grit: 35
+    armor: Medium
+    primary: Wooden Bat
+    secondary: Foam Finger Pike
+    signature: Power Swing
+    skills: [Home Run Timing, Line Drive, Pit Grip]
+    capstone: Blood Diamond Bat
+  linebacker:
+    name: Linebacker
+    sport: football
+    role: "Tank/disruptor"
+    spd: 5.7
+    hp: 140
+    grit: 45
+    armor: Heavy
+    primary: Shoulder Ram
+    secondary: Shield
+    signature: Shoulder Charge
+    skills: [Shoulder Charge, Shield Up, Shield Bash, Huddle, Taunting Call]
+    capstone: Blitzkrieg
+  qb:
+    name: Quarterback
+    sport: football
+    role: "Summoner/field general"
     spd: 6.0
-    arm: 1
-    loadout: [Playbook Launcher, Sidearm, Audible, Pep Talk, Hail Mary]
-    summons: [Receiver, Lineman, Kicker]
-  Pitcher:
-    spd: 6.0
-    arm: 0
-    loadout: [Whistle Bomb, Corked Bat, Curveball, Rosin Grip, Seventh-Inning Stretch]
-  Batter:
-    spd: 6.0
-    arm: 1
-    loadout: [Foam-Finger Pike, SMG, Bunt(Parry), Pine Tar, Grand Slam]
-  Linebacker:
-    spd: 5.5
-    arm: 2
-    loadout: [Shoulder Ram, Shotgun, Blitz, Goal Line Stand, Pile-Up]
-  Point Guard:
-    spd: 6.5
-    arm: 0
-    loadout: [Assist Pistol, Carbine, Pick & Roll, No-Look Pass, Full-Court Press]
-  Power Forward:
-    spd: 5.5
-    arm: 2
-    loadout: [Board Crusher, DMR, Box Out, Second Chance, Putback]
+    hp: 100
+    grit: 20
+    armor: Light
+    summoner: true
+    primary: Precision Pass
+    secondary: Command Calls
+    signature: Summons
+    skills: [Offensive Line, Precision Pass, Playbook, Audible Call]
+    capstone: Hail Mary
+    summons: [Lineman, Receiver]
+  point_guard:
+    name: Point Guard
+    sport: basketball
+    role: "Mobility/support"
+    spd: 6.2
+    hp: 95
+    grit: 20
+    armor: Light
+    primary: Energy Pass
+    secondary: Dashes
+    signature: Cross-Over Dash
+    skills: [Cross-Over Dash, No-Look Pass, Floor General, Pick-and-Roll]
+    capstone: Full Court Press
+  center:
+    name: Center
+    sport: basketball
+    role: "Zone control/AOE slams"
+    spd: 5.9
+    hp: 120
+    grit: 30
+    armor: Medium
+    primary: Dunk Attacks
+    secondary: Grapples
+    signature: Box Out
+    skills: [Box Out, Hook Shot, Alley-Oop Grab, Rebounder, Paint Dominance]
+    capstone: Slam of the Damned
+
+# Earlier v0.1 loadouts (guns and ultimates). Not used; kept for reference until reconciled.
+unreconciled_v0_1_loadouts:
+  QB: [Playbook Launcher, Sidearm, Audible, Pep Talk, Hail Mary]
+  Pitcher: [Whistle Bomb, Corked Bat, Curveball, Rosin Grip, Seventh-Inning Stretch]
+  Batter: [Foam-Finger Pike, SMG, Bunt(Parry), Pine Tar, Grand Slam]
+  Linebacker: [Shoulder Ram, Shotgun, Blitz, Goal Line Stand, Pile-Up]
+  Point Guard: [Assist Pistol, Carbine, Pick & Roll, No-Look Pass, Full-Court Press]
+  Power Forward (now Center): [Board Crusher, DMR, Box Out, Second Chance, Putback]
