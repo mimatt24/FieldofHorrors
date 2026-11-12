@@ -15,6 +15,14 @@ if [ -f FieldOfHorrors/data/classes/classes.json ]; then
   ' FieldOfHorrors/data/classes/classes.json >/dev/null || fail "classes.json schema/range check failed"
 fi
 
-# 2) docs exist
+# 2) the slice's Pitcher stats match classes.json
+TUNING=FieldOfHorrors/game/data/tuning.json
+if [ -f "$TUNING" ] && [ -f FieldOfHorrors/data/classes/classes.json ]; then
+  want=$(jq -c '.[] | select(.id=="pitcher") | [.spd,.hp,.grit]' FieldOfHorrors/data/classes/classes.json)
+  have=$(jq -c '.player | [.spd,.hp,.grit]' "$TUNING")
+  [ "$want" = "$have" ] || fail "tuning.json player stats $have do not match classes.json pitcher $want"
+fi
+
+# 3) docs exist
 test -d FieldOfHorrors/docs || fail "docs/ missing"
 echo "✅ validations passed"

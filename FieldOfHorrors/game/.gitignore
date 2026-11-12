@@ -1,0 +1,6 @@
+# Godot 4 editor cache and local settings
+.godot/
+*.translation
+export_presets.cfg
+# Builds
+/builds/
