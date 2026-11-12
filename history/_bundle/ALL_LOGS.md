@@ -1,0 +1,15 @@
+# Field Of Horrors — All Logs Bundle
+
+
+---
+## Auto Report: 2026-11-12T18:16:11Z.md
+
+# Auto Report — 2026-11-12T18:16:11Z
+- Branch: dependabot/github_actions/actions/labeler-7
+- Commit: 46941aa
+
+## Changed Files (HEAD^ → HEAD)
+```
+M	.github/workflows/auto-label.yml
+```
+
